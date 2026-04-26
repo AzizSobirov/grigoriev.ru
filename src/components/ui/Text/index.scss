@@ -1,0 +1,40 @@
+@use "scss/helpers" as *;
+
+.text-h1 {
+  font-size: clamp(2.25rem, 0.9968rem + 4.2215vw, 6.0625rem);
+  font-weight: 300;
+  line-height: 1.2;
+
+  strong,
+  b {
+    font-weight: 700;
+  }
+}
+
+.text-h2 {
+  font-size: clamp(1.5rem, 0.9808rem + 2.3077vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+
+  strong,
+  b {
+    color: var(--primary);
+    font-weight: 700;
+  }
+}
+
+.text-h3 {
+  color: var(--primary);
+  font-size: clamp(1.25rem, 0.9615rem + 1.2821vw, 2.5rem);
+  font-weight: 700;
+}
+
+.text-h4 {
+  color: var(--secondary);
+  font-size: rem(20);
+  font-weight: 700;
+
+  @include media(sm) {
+    font-size: rem(16);
+  }
+}
