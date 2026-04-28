@@ -1,271 +1,149 @@
 // modal
 const modal = {
-  el: document.querySelector(".modal-overlay"),
+  el: document.querySelector('.modal-overlay'),
   activeModal: null,
 
   init() {
-    this.setupTriggers();
-    this.setupOutsideClick();
+    this.setupTriggers()
+    this.setupOutsideClick()
   },
 
   setupTriggers() {
-    const triggers = document.querySelectorAll("[data-modal]");
+    const triggers = document.querySelectorAll('[data-modal]')
     triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const modalName = trigger.dataset.modal;
-        if (modalName === "close") {
-          this.close();
+      trigger.addEventListener('click', () => {
+        const modalName = trigger.dataset.modal
+        if (modalName === 'close') {
+          this.close()
         } else {
-          this.open(modalName);
+          this.open(modalName)
         }
-      });
-    });
+      })
+    })
   },
 
   setupOutsideClick() {
-    this.el.addEventListener("click", (event) => {
+    this.el.addEventListener('click', (event) => {
       if (event.target === this.el) {
-        this.close();
+        this.close()
       }
-    });
+    })
   },
 
   open(name) {
-    const targetModal = this.el.querySelector(`[data-template="${name}"]`);
+    const targetModal = this.el.querySelector(`[data-template="${name}"]`)
 
     if (targetModal) {
-      this.close(true); // Close any currently active modal
-      this.activeModal = targetModal;
+      this.close(true) // Close any currently active modal
+      this.activeModal = targetModal
 
-      this.el.style.display = "flex"; // Show the overlay
+      this.el.style.display = 'flex' // Show the overlay
       requestAnimationFrame(() => {
-        this.el.classList.add("show"); // Animate overlay
-        this.activeModal.style.display = "flex"; // Show modal content
+        this.el.classList.add('show') // Animate overlay
+        this.activeModal.style.display = 'flex' // Show modal content
 
         // Add animation class to modal content
         requestAnimationFrame(() => {
-          this.activeModal.classList.add("show");
-        });
-      });
+          this.activeModal.classList.add('show')
+        })
+      })
     } else {
-      console.error(`Modal with name "${name}" not found.`);
+      console.error(`Modal with name "${name}" not found.`)
     }
   },
 
   close(onlyModal = false) {
     if (onlyModal) {
       if (this.activeModal) {
-        this.activeModal.style.display = "none"; // Fully hide modal content
-        this.activeModal.classList.remove("show"); // Hide modal content
+        this.activeModal.style.display = 'none' // Fully hide modal content
+        this.activeModal.classList.remove('show') // Hide modal content
       }
     } else {
       if (this.activeModal) {
-        this.activeModal.classList.remove("show"); // Hide modal content
-        const modalToHide = this.activeModal; // Preserve reference for timeout
-        this.activeModal = null;
+        this.activeModal.classList.remove('show') // Hide modal content
+        const modalToHide = this.activeModal // Preserve reference for timeout
+        this.activeModal = null
 
         setTimeout(() => {
-          modalToHide.style.display = "none"; // Fully hide after animation
-        }, 250); // Match the CSS animation duration
+          modalToHide.style.display = 'none' // Fully hide after animation
+        }, 250) // Match the CSS animation duration
       }
 
-      this.el.classList.remove("show"); // Animate overlay
+      this.el.classList.remove('show') // Animate overlay
       this.el.addEventListener(
-        "transitionend",
+        'transitionend',
         () => {
-          if (!this.el.classList.contains("show")) {
-            this.el.style.display = "none"; // Fully hide overlay
+          if (!this.el.classList.contains('show')) {
+            this.el.style.display = 'none' // Fully hide overlay
           }
         },
-        { once: true }
-      );
+        { once: true },
+      )
     }
   },
-};
-modal.init();
+}
+modal.init()
 
-// header
-const header = document.querySelector(".header");
-if (header) {
-  const menu = header.querySelector(".header__catalog");
-  const services = menu.querySelectorAll(".menu-item-has-children");
-  let lastScrollY = window.scrollY;
+// Header & Sidebar
+const header = document.querySelector('.header')
+const sidebar = document.querySelector('.sidebar')
+const burgerOpen = document.querySelector('.header__burger-open')
+const burgerClose = document.querySelector('.header__burger-close')
+const sidebarMenu = document.querySelector('.sidebar__menu')
 
-  if (window.innerWidth > 1280) {
-    window.addEventListener("scroll", () => {
-      const header = document.querySelector("header");
-      const currentScrollY = window.scrollY;
+if (header && sidebar && burgerOpen && burgerClose && sidebarMenu) {
+  const menu = header.querySelector('.menu')
+  if (menu) {
+    sidebarMenu.innerHTML = menu.outerHTML
 
-      if (currentScrollY > lastScrollY) {
-        // Scrolling Down
-        header.classList.remove("up");
-        header.classList.add("down");
-      } else {
-        // Scrolling Up
-        header.classList.remove("down");
-        header.classList.add("up");
+    // Setup mobile sub-menu toggles
+    const mobileHasChildren = sidebarMenu.querySelectorAll('.menu-item-has-children')
+    mobileHasChildren.forEach((item) => {
+      const link = item.querySelector('a')
+      if (link) {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 1024) {
+            e.preventDefault()
+            item.classList.toggle('is-active')
+          }
+        })
       }
-
-      header.classList.toggle("sticky", currentScrollY > 0);
-      lastScrollY = currentScrollY;
-    });
+    })
   }
 
-  services.forEach((service) => {
-    const subMenu = service.querySelector(".sub-menu");
+  const toggleMenu = (open) => {
+    header.classList.toggle('is-menu-open', open)
+    sidebar.classList.toggle('active', open)
+    document.body.style.overflow = open ? 'hidden' : ''
+  }
 
-    service.addEventListener("mouseenter", () => {
-      subMenu.style.display = "flex"; // Ensure the submenu is visible
+  burgerOpen.addEventListener('click', () => toggleMenu(true))
+  burgerClose.addEventListener('click', () => toggleMenu(false))
 
-      // Reset any previous positioning
-      subMenu.style.left = "";
-      subMenu.style.right = "";
-
-      setTimeout(() => {
-        subMenu.dataset.state = "active";
-
-        // Check if submenu overflows the viewport
-        const rect = subMenu.getBoundingClientRect();
-        const viewportWidth = window.innerWidth;
-
-        // If submenu extends beyond the right edge of the viewport
-        if (rect.right > viewportWidth) {
-          // Position it to align with the right edge of the parent
-          subMenu.style.left = "auto";
-          subMenu.style.right = "0";
-        }
-      }, 10);
-    });
-
-    service.addEventListener("mouseleave", () => {
-      subMenu.dataset.state = "inactive";
-
-      subMenu.addEventListener("transitionend", function handler(event) {
-        if (subMenu.dataset.state != "active") {
-          subMenu.style.display = "none"; // Hide after fade-out
-          // Reset positioning when hiding
-          subMenu.style.left = "";
-          subMenu.style.right = "";
-          subMenu.removeEventListener("transitionend", handler);
-        }
-      });
-    });
-  });
-
-  const tabsEl = header.querySelector(".mobile__menu-tabs");
-  const tabs = tabsEl.querySelectorAll("[data-toggle]");
-  const tabsBody = header.querySelector(".mobile__menu-content");
-  const tabsContent = header.querySelector("#menu-content");
-  const tabsContentClose = header.querySelector(".mobile__menu-close");
-  const tabsContacts = tabsEl.querySelector(".mobile__menu-contacts");
-
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      const isActive = tab.classList.contains("active");
-      tabs.forEach((tab) => tab.classList.remove("active"));
-      tabsContacts.style.maxHeight = 0;
-
-      if (isActive) {
-        tabsBody.classList.remove("show");
-
-        // Wait for the animation to finish before setting display to 'none'
-        tabsBody.addEventListener("transitionend", function handler(event) {
-          if (
-            event.propertyName === "transform" &&
-            !tabsBody.classList.contains("show")
-          ) {
-            tabsBody.style.display = "none";
-            tabsContent.innerHTML = "";
-            tabsBody.removeEventListener("transitionend", handler);
-          }
-        });
+  // Close sidebar on link click
+  const sidebarLinks = sidebar.querySelectorAll('a')
+  sidebarLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (!link.parentElement.classList.contains('menu-item-has-children')) {
+        toggleMenu(false)
       }
-
-      // If tab was not already active, show the content
-      if (!isActive) {
-        tab.classList.add("active");
-
-        if (tab.dataset.toggle != "contacts") {
-          tabsBody.style.display = "flex";
-
-          requestAnimationFrame(() => {
-            tabsBody.classList.add("show");
-          });
-        } else {
-          tabsContacts.style.maxHeight = tabsContacts.scrollHeight + "px";
-          tabsBody.classList.remove("show");
-
-          // Wait for the animation to finish before setting display to 'none'
-          tabsBody.addEventListener("transitionend", function handler(event) {
-            if (
-              event.propertyName === "transform" &&
-              !tabsBody.classList.contains("show")
-            ) {
-              tabsBody.style.display = "none";
-              tabsContent.innerHTML = "";
-              tabsBody.removeEventListener("transitionend", handler);
-            }
-          });
-        }
-
-        if (tab.dataset.toggle == "menu") {
-          // Get the top menu content
-          const topMenu = header.querySelector(".header__top-menu .menu");
-          const topMenuHtml = topMenu ? topMenu.innerHTML : "";
-
-          tabsContent.innerHTML = `
-            <ul class="menu">
-            ${topMenuHtml}
-            </ul>
-          `;
-        } else if (tab.dataset.toggle == "catalog") {
-          // Get the bottom menu (catalog) content
-          const catalogMenu = header.querySelector(".header__catalog .menu");
-          const catalogMenuHtml = catalogMenu ? catalogMenu.innerHTML : "";
-
-          tabsContent.innerHTML = `
-            <ul class="menu">
-            ${catalogMenuHtml}
-            </ul>
-          `;
-        }
-      }
-    });
-  });
-
-  tabsContentClose.addEventListener("click", () => {
-    // Add animation for hiding
-    tabsBody.classList.remove("show");
-    tabsBody.addEventListener("transitionend", function handler(event) {
-      if (
-        event.propertyName === "transform" &&
-        !tabsBody.classList.contains("show")
-      ) {
-        tabsBody.style.display = "none";
-        tabsContent.innerHTML = "";
-        tabsBody.removeEventListener("transitionend", handler);
-      }
-    });
-
-    tabs.forEach((tab) => {
-      tab.classList.remove("active");
-    });
-  });
+    })
+  })
 }
 
 // Footer
-const currentYear = document.getElementById("current-year");
+const currentYear = document.getElementById('current-year')
 if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
+  currentYear.textContent = new Date().getFullYear()
 }
 
 // Swiper
-let reviewsSwiper = new Swiper(".reviews .reviews__swiper .swiper", {
-  slidesPerView: "auto",
+let reviewsSwiper = new Swiper('.reviews .reviews__swiper .swiper', {
+  slidesPerView: 'auto',
   spaceBetween: 12,
   navigation: {
-    nextEl: ".reviews .swiper-button-next",
-    prevEl: ".reviews .swiper-button-prev",
+    nextEl: '.reviews .swiper-button-next',
+    prevEl: '.reviews .swiper-button-prev',
   },
   breakpoints: {
     475: {
@@ -280,90 +158,90 @@ let reviewsSwiper = new Swiper(".reviews .reviews__swiper .swiper", {
       spaceBetween: 20,
     },
   },
-});
+})
 
 // Initialize the fancybox
 const fancyboxTriggers = Array.from(
-  document.querySelectorAll("[data-fancybox]")
-).filter((trigger) => trigger.dataset.fancybox);
+  document.querySelectorAll('[data-fancybox]'),
+).filter((trigger) => trigger.dataset.fancybox)
 if (fancyboxTriggers) {
-  const fancyboxInstances = [];
+  const fancyboxInstances = []
   fancyboxTriggers.forEach((trigger) => {
-    const name = trigger.dataset.fancybox;
+    const name = trigger.dataset.fancybox
     if (fancyboxInstances.includes(name)) {
-      return; // Skip if already bound
+      return // Skip if already bound
     }
     // Add the name to the `fancyboxInstances` list
-    fancyboxInstances.push(name);
-  });
+    fancyboxInstances.push(name)
+  })
   fancyboxInstances.forEach((name) => {
     Fancybox.bind(`[data-fancybox="${name}"]`, {
       Images: { Panzoom: { maxScale: 3 } },
-    });
-  });
+    })
+  })
 }
 
 // init phone mask
-const phoneMasks = document.querySelectorAll("input[name='phone']");
+const phoneMasks = document.querySelectorAll("input[name='phone']")
 phoneMasks.forEach((input) => {
-  let keyCode;
+  let keyCode
   function mask(event) {
-    event.keyCode && (keyCode = event.keyCode);
-    let pos = this.selectionStart;
-    if (pos < 3) event.preventDefault();
-    let matrix = "+7 (___) ___-__-__",
+    event.keyCode && (keyCode = event.keyCode)
+    let pos = this.selectionStart
+    if (pos < 3) event.preventDefault()
+    let matrix = '+7 (___) ___-__-__',
       i = 0,
-      def = matrix.replace(/\D/g, ""),
-      val = this.value.replace(/\D/g, ""),
+      def = matrix.replace(/\D/g, ''),
+      val = this.value.replace(/\D/g, ''),
       newValue = matrix.replace(/[_\d]/g, function (a) {
-        return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
-      });
-    i = newValue.indexOf("_");
+        return i < val.length ? val.charAt(i++) || def.charAt(i) : a
+      })
+    i = newValue.indexOf('_')
     if (i != -1) {
-      i < 5 && (i = 3);
-      newValue = newValue.slice(0, i);
+      i < 5 && (i = 3)
+      newValue = newValue.slice(0, i)
     }
     let reg = matrix
       .substr(0, this.value.length)
       .replace(/_+/g, function (a) {
-        return "\\d{1," + a.length + "}";
+        return '\\d{1,' + a.length + '}'
       })
-      .replace(/[+()]/g, "\\$&");
-    reg = new RegExp("^" + reg + "$");
+      .replace(/[+()]/g, '\\$&')
+    reg = new RegExp('^' + reg + '$')
     if (
       !reg.test(this.value) ||
       this.value.length < 5 ||
       (keyCode > 47 && keyCode < 58)
     )
-      this.value = newValue;
-    if (event.type == "blur" && this.value.length < 5) this.value = "";
+      this.value = newValue
+    if (event.type == 'blur' && this.value.length < 5) this.value = ''
 
     if (this.value.length == 18 || this.value.length == 0) {
-      input.dataset.numbervalid = "true";
+      input.dataset.numbervalid = 'true'
     } else {
-      input.dataset.numbervalid = "false";
+      input.dataset.numbervalid = 'false'
     }
   }
 
-  input.addEventListener("input", mask, false);
-  input.addEventListener("focus", mask, false);
-  input.addEventListener("blur", mask, false);
-  input.addEventListener("keydown", mask, false);
-});
+  input.addEventListener('input', mask, false)
+  input.addEventListener('focus', mask, false)
+  input.addEventListener('blur', mask, false)
+  input.addEventListener('keydown', mask, false)
+})
 
 // form
 function successSend() {
-  modal.open("success");
+  modal.open('success')
 
   setTimeout(() => {
-    modal.close();
-  }, 3000);
+    modal.close()
+  }, 3000)
 }
 
-const forms = document.querySelectorAll(".the-form");
+const forms = document.querySelectorAll('.the-form')
 forms.forEach((form) => {
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    successSend();
-  });
-});
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    successSend()
+  })
+})
