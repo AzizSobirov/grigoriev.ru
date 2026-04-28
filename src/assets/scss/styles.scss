@@ -1,5 +1,5 @@
-@use "./helpers" as *;
-@use "./base";
+@use './helpers' as *;
+@use './base';
 
 #app {
   width: 100%;
@@ -7,11 +7,11 @@
 }
 
 main {
-  padding-top: rem(200);
+  padding-top: rem(60);
   width: 100%;
 
-  @include media("xl") {
-    padding-top: rem(10);
+  @include media('lg') {
+    padding-top: rem(58);
   }
 }
 
@@ -29,12 +29,12 @@ section {
     gap: rem(75);
   }
 
-  @include media("3xl") {
+  @include media('3xl') {
     .container {
       gap: rem(50);
     }
   }
-  @include media("sm") {
+  @include media('sm') {
     padding: rem(35) 0;
 
     .container {

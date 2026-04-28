@@ -1,0 +1,43 @@
+---
+import { Section, H2, H3, P, Image, Icon, Button, BgImg } from 'ui'
+---
+
+<!-- Hero -->
+<Section name="hero">
+  <Fragment #header>
+    <BgImg src="hero/bg.jpg" />
+  </Fragment>
+
+  <div class="text-h1">Юридические услуги по всей России</div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .hero {
+    position: relative;
+    padding: rem(100) 0;
+    height: calc(100vh - rem(60));
+
+    @include media('lg') {
+      padding: rem(40) 0 !important;
+      height: calc(100dvh - rem(58));
+    }
+
+    .container {
+      height: 100%;
+      justify-content: flex-end;
+
+      @include media('sm') {
+        justify-content: flex-start;
+      }
+    }
+
+    .text-h1 {
+      color: #fff;
+      font-family: var(--font-secondary);
+      font-size: clamp(2.75rem, calc(2.261rem + 2.174vw), 4rem);
+      text-wrap: balance;
+    }
+  }
+</style>
