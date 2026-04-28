@@ -1,258 +1,296 @@
 ---
-import { Image, Icon, H3 } from "ui";
+import { Image, Icon } from 'ui'
 ---
 
 <footer class="footer">
   <div class="container">
-    <div class="footer__wrapper">
-      <div class="footer__item group">
+    <div class="footer__top">
+      <div class="footer__logo-block">
         <a href="/" class="footer__logo">
-          <Image src="logo.svg" />
-          <span class="col">
-            <strong>ДОКТОР КИСЕЛЕВ</strong>
-            <span>КЛИНИКА</span>
-          </span>
+          <Image src="logo.svg" alt="logo" />
         </a>
+      </div>
 
-        <p>© 2025 . Доктор Киселев</p>
+      <div class="footer__info">
+        <div class="footer__info-item">
+          <span class="footer__info-label">Москва</span>
+          <p class="footer__info-text">Москва, ул. Льва Толстого, 5/1</p>
+        </div>
+        <div class="footer__info-item">
+          <span class="footer__info-label">Время работы</span>
+          <p class="footer__info-text">Ежедневно с 10:00 до 20:00</p>
+        </div>
+      </div>
 
-        <a
-          class="text-gray"
-          href="#"
-          target="_blank"
-          title="Политика конфиденциальности"
-        >
-          Политика конфиденциальности
-        </a>
+      <div class="footer__nav">
+        <ul class="footer__menu">
+          <li><a href="/services">Услуги</a></li>
+          <li><a href="/team">Команда</a></li>
+          <li><a href="/projects">Проекты</a></li>
+          <li><a href="/reviews">Отзывы</a></li>
+          <li><a href="/news">Новости</a></li>
+          <li><a href="/contacts">Контакты</a></li>
+        </ul>
+      </div>
+    </div>
 
-        <a
-          href="https://seo-tex.ru/"
-          target="_blank"
-          title="Разработка сайта"
-          class="footer__dev"
-        >
-          <div class="icon">
-            <svg
-              width="27"
-              height="28"
-              viewBox="0 0 27 28"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.4857 0.651367C5.70161 0.651367 0 6.27452 0 14.1441C0 16.2745 0.416494 18.231 1.17772 19.9702L7.95637 13.7963L5.55801 11.0282L20.7383 8.01365L15.7404 22.7963L13.342 20.0282L6.76437 26.0282C8.7176 27.0716 10.9867 27.6514 13.4857 27.6514C21.3127 27.6514 27 22.0282 27 14.1586C27 6.28904 21.3127 0.651367 13.4857 0.651367Z"
-                fill="currentColor"></path>
-            </svg>
+    <div class="footer__main">
+      <div class="footer__contacts">
+        <a href="tel:+79112331212" class="footer__phone">+7 (911) 233-12-12</a>
+
+        <div class="footer__right-side">
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link">
+              <Icon src="telegram.svg" />
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="footer__social-link">
+              <Icon src="telegram.svg" />
+              <span>Telegram</span>
+            </a>
+            <a href="#" class="footer__social-link">
+              <Icon src="telegram.svg" />
+              <span>Telegram</span>
+            </a>
           </div>
-          <span>
-            Разработка <br />
-            и продвижение
-          </span>
-        </a>
-      </div>
-
-      <div class="footer__item">
-        <ul class="menu">
-          <li class="menu-item">
-            <a href="/">Цены на услуги</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">О клинике</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Специалисты</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Отзывы</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Контакты</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer__item">
-        <ul class="menu">
-          <li class="menu-item">
-            <a href="/">Мануальная терапия</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Остеопатия</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Невролог</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Лечение поясничной грыжи</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Лечение грыжи шейного отдела</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Лечение грыжи грудного отдела</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer__item">
-        <ul class="menu">
-          <li class="menu-item">
-            <a href="/">Лечение протрузии </a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Рефлексотерапия</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Боль в суставах</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Головные боли</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Боли в спине</a>
-          </li>
-          <li class="menu-item">
-            <a href="/">Боли в пояснице</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="footer__item">
-        <div
-          class="footer__license group"
-          data-fancybox="license"
-          data-src="/assets/img/license.png"
-        >
-          <Image src="license.png" />
-          <p>Лицензия №Л123124-24</p>
+          <a href="mailto:info@grigoriev.ru" class="footer__email"
+            >info@grigoriev.ru</a
+          >
         </div>
       </div>
     </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-links">
+        <a href="/terms">Пользовательское соглашение</a>
+        <a href="/privacy">Политика конфиденциальности</a>
+      </div>
+      <div class="footer__dev">Разработка и дизайн</div>
+    </div>
+  </div>
+
+  <div class="footer__watermark">
+    <!-- This would be the large justice icon -->
   </div>
 </footer>
 
 <style lang="scss" is:global>
-  @use "scss/helpers" as *;
+  @use 'scss/helpers' as *;
 
   .footer {
-    @include media("xl") {
-      padding-bottom: rem(70);
-    }
+    background: var(--text-color);
+    color: #fff;
+    padding-top: rem(40);
+    position: relative;
+    overflow: hidden;
 
-    &__wrapper {
-      padding-top: rem(58);
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: rem(80) rem(50);
-      border-top: rem(1) solid var(--primary);
+    &__top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: rem(40);
+      margin-bottom: rem(120);
 
-      @include media("sm") {
-        padding-top: rem(30);
-        gap: rem(40);
+      @include media('xl') {
+        grid-template-columns: 1fr 1fr;
       }
-    }
 
-    &__item {
-      gap: rem(20);
-
-      @include media("2xl") {
-        flex: 1 0 rem(280);
-      }
-      @include media("sm") {
-        flex-basis: 100%;
-      }
-    }
-
-    .menu {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: rem(15);
-
-      a {
-        &:hover {
-          color: var(--primary);
-          text-decoration: underline;
-        }
+      @include media('lg') {
+        grid-template-columns: 1fr;
+        margin-bottom: rem(60);
       }
     }
 
     &__logo {
-      margin-bottom: rem(10);
-      display: flex;
-      align-items: center;
-      gap: rem(30);
-
-      @include media("sm") {
-        gap: rem(20);
-      }
+      display: block;
+      width: rem(240);
+      filter: brightness(0) invert(1);
 
       img {
-        @include size(rem(82));
-        object-fit: contain;
-
-        @include media("sm") {
-          --size: #{rem(70)};
-        }
-      }
-
-      .col {
-        gap: rem(5);
+        width: 100%;
+        height: auto;
       }
     }
 
-    &__dev {
-      margin-top: auto;
-      color: #555;
-      font-size: 0.75rem;
-      font-weight: 400;
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: rem(32);
+
+      &-label {
+        font-size: rem(14);
+        color: rgba(255, 255, 255, 0.4);
+        display: block;
+        margin-bottom: rem(8);
+      }
+
+      &-text {
+        font-size: rem(16);
+        font-weight: 500;
+      }
+    }
+
+    &__menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: rem(12) rem(40);
+
+      @include media('sm') {
+        grid-template-columns: 1fr;
+      }
+
+      a {
+        font-size: rem(16);
+        font-weight: 500;
+        transition: opacity 0.3s;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+
+    &__main {
+      margin-bottom: rem(80);
+    }
+
+    &__contacts {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: rem(40);
+
+      @include media('xl') {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    &__phone {
+      font-size: rem(100);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: rem(-2);
+
+      @include media('2xl') {
+        font-size: rem(80);
+      }
+      @include media('xl') {
+        font-size: rem(72);
+      }
+      @include media('md') {
+        font-size: rem(48);
+      }
+      @include media('sm') {
+        font-size: rem(36);
+      }
+    }
+
+    &__right-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: rem(24);
+
+      @include media('xl') {
+        align-items: flex-start;
+        width: 100%;
+      }
+    }
+
+    &__email {
+      font-size: rem(80);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: rem(-2);
+
+      @include media('2xl') {
+        font-size: rem(64);
+      }
+      @include media('xl') {
+        font-size: rem(56);
+      }
+      @include media('md') {
+        font-size: rem(40);
+      }
+      @include media('sm') {
+        font-size: rem(32);
+      }
+    }
+
+    &__socials {
+      display: flex;
+      gap: rem(8);
+
+      @include media('sm') {
+        flex-wrap: wrap;
+      }
+    }
+
+    &__social-link {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.625rem;
-      transition: var(--transition-ease);
-      --icon-size: 1.875rem;
+      gap: rem(8);
+      padding: rem(12) rem(20);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: rem(12);
+      font-size: rem(14);
+      font-weight: 500;
+      transition: background 0.3s;
 
       &:hover {
-        color: var(--primary);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      :global(svg) {
+        width: rem(18);
+        height: rem(18);
       }
     }
 
-    &__license {
-      position: relative;
-      margin-top: rem(-30);
-      padding: rem(25) rem(40);
-      width: fit-content;
-      align-items: center;
+    &__bottom {
+      padding: rem(24) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
       gap: rem(20);
+      font-size: rem(14);
+      color: rgba(255, 255, 255, 0.4);
 
-      @include media("sm") {
-        margin-top: 0;
-        width: 100%;
+      @include media('md') {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        border-radius: rem(45) rem(45) 0 0;
+      &-links {
+        display: flex;
+        gap: rem(120);
 
-        @include media("xl") {
-          height: 150%;
+        @include media('sm') {
+          flex-direction: column;
+          gap: rem(12);
+        }
+
+        a:hover {
+          color: #fff;
         }
       }
+    }
 
-      img {
-        width: rem(165);
-        cursor: zoom-in;
+    &__watermark {
+      position: absolute;
+      top: rem(40);
+      right: rem(-100);
+      width: rem(600);
+      height: rem(600);
+      opacity: 0.05;
+      pointer-events: none;
+      background: url('/assets/img/logo.svg') no-repeat center;
+      background-size: contain;
+      filter: brightness(0) invert(1);
+
+      @include media('xl') {
+        display: none;
       }
     }
   }
