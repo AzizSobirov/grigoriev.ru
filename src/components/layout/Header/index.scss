@@ -155,8 +155,26 @@
       }
     }
 
+    &-location {
+      font-size: rem(14);
+      transition: var(--transition-ease);
+
+      &:hover {
+        color: var(--primary);
+      }
+
+      @include media('md') {
+        display: none;
+      }
+    }
+
     &-phone {
       display: none;
+      transition: var(--transition-ease);
+
+      &:hover {
+        transform: scale(1.1);
+      }
 
       @include media('xl') {
         display: block;
@@ -184,8 +202,22 @@
         display: none;
       }
 
+      &-phone {
+        transition: var(--transition-ease);
+
+        &:hover {
+          color: var(--primary);
+        }
+      }
+
       &-mail {
         opacity: 0.4;
+        transition: var(--transition-ease);
+
+        &:hover {
+          opacity: 1;
+          color: var(--primary);
+        }
       }
     }
 
