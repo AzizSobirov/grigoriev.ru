@@ -1,0 +1,206 @@
+---
+import { Section, H2, H3, P, Image, Icon, Button } from 'ui'
+
+const steps = [
+  {
+    id: '01',
+    title: 'Оставьте заявку или позвоните',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе реструктуризации, в рамках принудительного взыскания задолженности и процедуры банкротства',
+  },
+  {
+    id: '02',
+    title: 'Бесплатная консультация',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе реструктуризации, в рамках принудительного взыскания задолженности и процедуры банкротства',
+  },
+  {
+    id: '03',
+    title: 'Личная встреча',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе реструктуризации, в рамках принудительного взыскания задолженности и процедуры банкротства',
+  },
+  {
+    id: '04',
+    title: 'Заключение договора',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе реструктуризации, в рамках принудительного взыскания задолженности и процедуры банкротства',
+  },
+]
+---
+
+<!-- Steps -->
+<Section name="steps">
+  <div class="wrapper">
+    <div class="steps__sidebar">
+      <div class="steps__sidebar-text">
+        Ключевые этапы <br /> сотрудничества
+      </div>
+    </div>
+
+    <div class="steps__content">
+      <H2>Этапы работы</H2>
+
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          {
+            steps.map((step) => (
+              <div class="swiper-slide">
+                <div class="step-card">
+                  <div class="step-card__badge">{step.id}</div>
+                  <div class="step-card__title">{step.title}</div>
+                  <div class="step-card__desc">{step.desc}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .steps {
+    position: relative;
+    padding: rem(80) 0;
+
+    @include media('lg') {
+      padding: rem(60) 0;
+    }
+    @include media('sm') {
+      padding: rem(40) 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, transparent 0%, #a0c3d4 100%);
+      z-index: -1;
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(12);
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      display: flex;
+      align-items: center;
+
+      &-text {
+        font-size: rem(20);
+        color: var(--gray, #686868);
+        line-height: 1.4;
+        opacity: 0.8;
+      }
+
+      @include media('lg') {
+        display: none;
+      }
+    }
+
+    &__content {
+      grid-column-start: span 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: rem(32);
+
+      @include media('lg') {
+        width: 100%;
+      }
+
+      .swiper {
+        width: 100%;
+        overflow: visible;
+      }
+
+      .swiper-slide {
+        @include media('lg') {
+          width: rem(420);
+        }
+        @include media('sm') {
+          width: rem(320);
+        }
+      }
+
+      @media screen and (min-width: 1025px) {
+        .swiper-slide {
+          opacity: 0 !important;
+          pointer-events: none;
+        }
+
+        .swiper-slide-active,
+        .swiper-slide-next,
+        .swiper-slide-next + .swiper-slide {
+          opacity: 1 !important;
+          pointer-events: all;
+        }
+      }
+    }
+
+    .step-card {
+      background: #ffffff;
+      padding: rem(32);
+      border-radius: rem(16);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      min-height: rem(360);
+
+      @include media('sm') {
+        padding: rem(20);
+        min-height: rem(340);
+      }
+
+      &__badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary, #005a87);
+        color: #ffffff;
+        font-size: rem(14);
+        padding: rem(4) rem(20);
+        border-radius: rem(20);
+        width: fit-content;
+        margin-bottom: rem(24);
+      }
+
+      &__title {
+        font-size: rem(24);
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--text-dark, #161e28);
+        margin-bottom: rem(24);
+
+        @include media('sm') {
+          font-size: rem(20);
+          margin-bottom: rem(16);
+        }
+      }
+
+      &__desc {
+        font-size: rem(14);
+        line-height: 1.6;
+        color: var(--gray, #686868);
+        margin-top: auto;
+        opacity: 0.8;
+      }
+
+      &:hover {
+        box-shadow: 0 20px 40px rgba(0, 90, 135, 0.1);
+      }
+    }
+  }
+</style>

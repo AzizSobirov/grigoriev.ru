@@ -297,7 +297,13 @@ const advantages = [
   .services {
     position: relative;
     padding: rem(80) 0;
-    background-color: #f9fafb;
+
+    @include media('lg') {
+      padding: rem(60) 0;
+    }
+    @include media('sm') {
+      padding: rem(40) 0;
+    }
 
     .container {
       gap: rem(40) !important;

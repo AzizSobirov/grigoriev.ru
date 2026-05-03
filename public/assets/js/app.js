@@ -196,6 +196,17 @@ let servicesAdvantagesSwiper = new Swiper('.services__advantages .swiper', {
   },
 })
 
+let stepsSwiper = new Swiper('.steps .swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 12,
+  breakpoints: {
+    1025: {
+      slidesPerView: 2,
+      spaceBetween: 12,
+    },
+  },
+})
+
 let reviewsSwiper = new Swiper('.reviews .reviews__swiper .swiper', {
   slidesPerView: 'auto',
   spaceBetween: 12,
