@@ -1,0 +1,221 @@
+---
+import ServiceCard from '@/components/ServiceCard.astro'
+import { Section, H2, H3, P, Image, Icon, Button } from 'ui'
+
+const services = [
+  {
+    id: '01',
+    title: 'Автоюрист / Автоадвокат',
+    items: [
+      'Возврат водительских прав',
+      'Юрист по ДТП',
+      'Юрист по ОСАГО / КАСКО',
+      'Споры по каршерингу',
+      'Независимая автоэкспертиза',
+      'Автоадвокат по уголовным делам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '02',
+    title: 'Защита прав потребителей',
+    items: [
+      'Возврат денег за товар',
+      'Возврат денег за услугу',
+      'Нарушение условий договора',
+      'Помощь в спорах с маркетплейсами',
+      'Помощь в туристических спорах',
+      'Помощь в спорах с банками',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '03',
+    title: 'Семейный юрист',
+    items: [
+      'Расторжение брака',
+      'Раздел имущества и активов',
+      'Раздел ипотеки и кредитов',
+      'Споры о детях',
+      'Споры по алиментам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '04',
+    title: 'Жилищный юрист',
+    items: [
+      'Споры по праву собственности',
+      'Споры по вселению и выселению',
+      'Споры с УК и ТСЖ',
+      'Помощь при заливе квартиры',
+      'Определение порядка пользования квартирой',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '05',
+    title: 'Наследственный юрист',
+    items: [
+      'Раздел имущества',
+      'Оспаривание завещания',
+      'Восстановление сроков вступления',
+      'Признание наследника недостойным',
+      'Помощь при наследстве с долгами',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '06',
+    title: 'Защита прав дольщиков',
+    items: [
+      'Расторжение договора',
+      'Взыскание неустойки по ДДУ',
+      'Банкротство застройщика',
+      'Квартира ненадлежащего качества',
+      'Проверка застройщика',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '07',
+    title: 'Трудовой юрист',
+    items: [
+      'Незаконное увольнение',
+      'Задержка / невыплата зарплаты',
+      'Восстановление на работе',
+      'Производственная травма',
+      'Жалоба на работодателя',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '08',
+    title: 'Медицинский юрист',
+    items: [
+      'Споры с гос. медучреждениями',
+      'Споры с частными клиниками',
+      'Споры с косметологией',
+      'Споры со стоматологией',
+      'Навязанный кредит в медклинике',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '09',
+    title: 'Финансовый юрист',
+    items: [
+      'Возврат денег из КПК',
+      'Возврат денег от брокера',
+      'Возврат денег из криптовалют',
+      'Возврат денег с форекс рынков',
+      'Возврат денег с онлайн казино',
+      'Услуги кредитного юриста',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+]
+---
+
+<!-- Directions -->
+<Section name="directions">
+  <div class="directions__title">
+    Обеспечиваем надежную правовую поддержку в сфере финансовых и семейных
+    правоотношений, помогая эффективно решать юридические задачи и защищать
+    интересы клиентов.
+  </div>
+
+  <div class="directions__list">
+    {services.map((service) => <ServiceCard service={service} />)}
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .directions {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    &__title {
+      font-size: clamp(1.5rem, 0.5217rem + 4.3478vw, 4rem);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    &__list {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(12);
+
+      @include media('lg') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include media('sm') {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+</style>
