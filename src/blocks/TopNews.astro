@@ -1,6 +1,12 @@
 ---
 import { Section, H2 } from 'ui'
-import { Icon } from 'astro-icon/components'
+import NewsCard from '@/components/NewsCard.astro'
+
+interface Props {
+  title?: string
+}
+
+const { title = 'Новости' } = Astro.props
 
 const news = [
   {
@@ -38,21 +44,14 @@ const news = [
 
 <!-- Topnews -->
 <Section name="topnews">
-  <H2>Новости</H2>
+  <H2>{title ? title : 'Новости'}</H2>
 
   <div class="swiper">
     <div class="swiper-wrapper">
       {
         news.map((item) => (
           <div class="swiper-slide">
-            <a href="#" class="news-card">
-              <div class="news-card__tag">{item.tag}</div>
-              <p class="news-card__text">{item.text}</p>
-              <div class="news-card__footer">
-                <span class="news-card__date">{item.date}</span>
-                <Icon name="tabler:chevron-right" class="news-card__arrow" />
-              </div>
-            </a>
+            <NewsCard {...item} />
           </div>
         ))
       }
@@ -97,82 +96,6 @@ const news = [
       }
       @include media('sm') {
         width: rem(320);
-      }
-    }
-
-    .news-card {
-      background: #ffffff;
-      padding: rem(24);
-      border-radius: rem(16);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      min-height: rem(320);
-
-      @include media('sm') {
-        padding: rem(20);
-        min-height: rem(280);
-      }
-
-      &__tag {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--primary, #005a87);
-        color: #ffffff;
-        font-size: rem(12);
-        font-weight: 500;
-        padding: rem(6) rem(16);
-        border-radius: rem(20);
-        width: fit-content;
-        margin-bottom: rem(20);
-      }
-
-      &__text {
-        font-size: rem(16);
-        font-weight: 500;
-        line-height: 1.5;
-        color: var(--text-dark, #161e28);
-        margin-bottom: rem(24);
-        display: -webkit-box;
-        -webkit-line-clamp: 6;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-
-        @include media('sm') {
-          font-size: rem(14);
-        }
-      }
-
-      &__footer {
-        margin-top: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      &__date {
-        font-size: rem(14);
-        color: var(--gray, #686868);
-        opacity: 0.6;
-      }
-
-      &__arrow {
-        width: rem(24);
-        height: rem(24);
-        color: var(--text-dark, #161e28);
-        transition: transform 0.3s ease;
-      }
-
-      &:hover {
-        box-shadow: 0 20px 40px rgba(0, 90, 135, 0.1);
-
-        .news-card__arrow {
-          transform: translateX(rem(4));
-        }
       }
     }
   }

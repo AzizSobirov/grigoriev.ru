@@ -1,0 +1,259 @@
+---
+import { Section, H2 } from 'ui'
+import { Icon } from 'astro-icon/components'
+import NewsCard from '@/components/NewsCard.astro'
+
+const news = [
+  {
+    tag: 'Тег новости',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+  {
+    tag: 'Тег 2',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+  {
+    tag: 'Тег новости',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+  {
+    tag: 'Тег 2',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+  {
+    tag: 'Тег 3',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+  {
+    tag: 'Тег новости',
+    text: 'Практика разрешения споров ALUMNI Partners подготовила обзор самых важных и интересных позиций Верховного Суда РФ по делам о банкротстве за февраль 2026 года.',
+    date: '20.02.2026',
+  },
+]
+
+const categories = [
+  { name: 'Все новости', filter: 'all', active: true },
+  { name: 'Тег новости', filter: 'Тег новости', active: false },
+  { name: 'Тег 2', filter: 'Тег 2', active: false },
+  { name: 'Тег 3', filter: 'Тег 3', active: false },
+  { name: 'Тег 4', filter: 'Тег 4', active: false },
+  { name: 'Тег 5', filter: 'Тег 5', active: false },
+]
+---
+
+<!-- News -->
+<Section name="news">
+  <H2>Новости</H2>
+
+  <div class="wrapper">
+    <aside class="news__sidebar">
+      <nav class="filter-list" aria-label="Фильтр новостей">
+        {
+          categories.map((cat) => (
+            <button
+              class:list={['filter-item', { 'is-active': cat.active }]}
+              data-filter={cat.filter}
+              type="button"
+            >
+              <span>{cat.name}</span>
+              <Icon name="tabler:plus" class="icon-plus" />
+              <Icon name="tabler:minus" class="icon-minus" />
+            </button>
+          ))
+        }
+      </nav>
+
+      <div class="news__filter-swiper swiper">
+        <div class="swiper-wrapper">
+          {
+            categories.map((cat) => (
+              <div
+                class:list={['swiper-slide', { 'is-active': cat.active }]}
+                data-filter={cat.filter}
+              >
+                {cat.name}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="news__content">
+      <div class="news-grid">
+        {news.map((item) => <NewsCard {...item} />)}
+      </div>
+      <div class="news__empty">По данному запросу новостей не найдено</div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .news {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    .container {
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(32);
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(20);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      width: 100%;
+      overflow: hidden;
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        @include media('lg') {
+          display: none;
+        }
+      }
+
+      .filter-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(12) rem(16);
+        background: #f2f2f2;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid rgb(104, 104, 104, 0.2);
+        color: var(--text-dark, #161e28);
+
+        span {
+          font-size: rem(14);
+          font-weight: 500;
+        }
+
+        svg {
+          width: rem(18);
+          height: rem(18);
+          opacity: 0.6;
+        }
+
+        .icon-plus {
+          display: none;
+        }
+        .icon-minus {
+          display: block;
+        }
+
+        &.is-active {
+          background: var(--primary, #005a87);
+          color: #ffffff;
+
+          svg {
+            opacity: 1;
+          }
+
+          .icon-plus {
+            display: block;
+          }
+          .icon-minus {
+            display: none;
+          }
+        }
+
+        &:hover:not(.is-active) {
+          background: #e8e8e8;
+        }
+      }
+    }
+
+    &__empty {
+      display: none;
+      padding: rem(60) 0;
+      text-align: center;
+      font-size: rem(20);
+      color: var(--gray, #686868);
+      width: 100%;
+      background: #fff;
+      border-radius: rem(16);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+
+      @include media('sm') {
+        font-size: rem(16);
+        padding: rem(40) rem(20);
+      }
+    }
+
+    &__filter {
+      &-swiper {
+        width: 100%;
+        display: none;
+
+        @include media('lg') {
+          display: block;
+          overflow: visible;
+        }
+
+        .swiper-slide {
+          padding: rem(8) rem(16);
+          width: fit-content !important;
+          font-size: rem(15);
+          transition: all 0.3s ease;
+          border: rem(1) solid rgb(104, 104, 104, 0.2);
+          border-radius: rem(8);
+          cursor: pointer;
+
+          &.is-active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+          }
+        }
+      }
+    }
+
+    .news-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(12);
+
+      @include media('xl') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+</style>

@@ -178,6 +178,71 @@ if (servicesEl) {
   })
 }
 
+// news
+const newsEl = document.querySelector('.news')
+if (newsEl) {
+  const desktopFilters = newsEl.querySelectorAll('.filter-item')
+  const mobileFilters = newsEl.querySelectorAll('.news__filter-swiper .swiper-slide')
+  const cards = newsEl.querySelectorAll('.news-card')
+
+  const filterNews = (category) => {
+    // Update active states
+    const allFilters = [...desktopFilters, ...mobileFilters]
+    allFilters.forEach((f) => {
+      if (f.dataset.filter === category) {
+        f.classList.add('is-active')
+      } else {
+        f.classList.remove('is-active')
+      }
+    })
+
+    // Filter cards
+    let visibleCount = 0
+    cards.forEach((card) => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block'
+        visibleCount++
+        requestAnimationFrame(() => {
+          card.style.opacity = '1'
+          card.style.transform = 'translateY(0)'
+        })
+      } else {
+        card.style.opacity = '0'
+        card.style.transform = 'translateY(20px)'
+        setTimeout(() => {
+          card.style.display = 'none'
+        }, 300)
+      }
+    })
+
+    // Handle empty state
+    const emptyMsg = newsEl.querySelector('.news__empty')
+    if (emptyMsg) {
+      if (visibleCount === 0) {
+        emptyMsg.style.display = 'block'
+        requestAnimationFrame(() => {
+          emptyMsg.style.opacity = '1'
+        })
+      } else {
+        emptyMsg.style.opacity = '0'
+        emptyMsg.style.display = 'none'
+      }
+    }
+  }
+
+  desktopFilters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      filterNews(filter.dataset.filter)
+    })
+  })
+
+  mobileFilters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      filterNews(filter.dataset.filter)
+    })
+  })
+}
+
 // Footer
 const currentYear = document.getElementById('current-year')
 if (currentYear) {
@@ -257,6 +322,25 @@ let reviewsMapSwiper = new Swiper('.reviews__map .swiper', {
       slidesPerView: 3,
       spaceBetween: 12,
     },
+  },
+})
+
+let newsFilterSwiper = new Swiper('.news__filter-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+})
+
+let postGallerySwiper = new Swiper('.post__gallery', {
+  slidesPerView: 1,
+  spaceBetween: 0,
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
   },
 })
 

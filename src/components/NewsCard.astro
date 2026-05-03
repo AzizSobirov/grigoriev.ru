@@ -1,0 +1,108 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  tag: string
+  text: string
+  date: string
+  href?: string
+}
+
+const { tag, text, date, href = '#' } = Astro.props
+---
+
+<a href={href} class="news-card" data-category={tag}>
+  <article>
+    <div class="news-card__tag">{tag}</div>
+    <div class="news-card__text">{text}</div>
+    <footer class="news-card__footer">
+      <time class="news-card__date" datetime={date}>{date}</time>
+      <Icon name="tabler:chevron-right" class="news-card__arrow" />
+    </footer>
+  </article>
+</a>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .news-card {
+    background: #ffffff;
+    padding: rem(24);
+    border-radius: rem(16);
+    height: 100%;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    min-height: rem(320);
+
+    @include media('sm') {
+      padding: rem(20);
+      min-height: rem(280);
+    }
+
+    article {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary, #005a87);
+      color: #ffffff;
+      font-size: rem(12);
+      font-weight: 500;
+      padding: rem(6) rem(16);
+      border-radius: rem(20);
+      width: fit-content;
+      margin-bottom: rem(12);
+    }
+
+    &__text {
+      font-size: rem(16);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-dark, #161e28);
+      margin-bottom: rem(24);
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      @include media('sm') {
+        font-size: rem(15);
+      }
+    }
+
+    &__footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__date {
+      font-size: rem(16);
+      color: var(--gray, #686868);
+      opacity: 0.6;
+    }
+
+    &__arrow {
+      width: rem(24);
+      height: rem(24);
+      color: var(--text-dark, #161e28);
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 10px 20px rgba(0, 90, 135, 0.1);
+
+      .news-card__arrow {
+        transform: translateX(rem(4));
+      }
+    }
+  }
+</style>

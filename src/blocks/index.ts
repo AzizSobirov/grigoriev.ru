@@ -1,4 +1,6 @@
 export { default as Hero } from "./Hero.astro";
+export { default as News } from "./News.astro";
+export { default as Post } from "./Post.astro";
 export { default as Protection } from "./Protection.astro";
 export { default as Reviews } from "./Reviews.astro";
 export { default as Services } from "./Services.astro";
