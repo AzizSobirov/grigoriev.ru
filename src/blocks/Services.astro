@@ -1,0 +1,563 @@
+---
+import ServiceCard from '@/components/ServiceCard.astro'
+import { Section, H2, H3, P, Image, Button } from 'ui'
+import { Icon } from 'astro-icon/components'
+
+const services = [
+  {
+    id: '01',
+    title: 'Автоюрист / Автоадвокат',
+    items: [
+      'Возврат водительских прав',
+      'Юрист по ДТП',
+      'Юрист по ОСАГО / КАСКО',
+      'Споры по каршерингу',
+      'Независимая автоэкспертиза',
+      'Автоадвокат по уголовным делам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '02',
+    title: 'Защита прав потребителей',
+    items: [
+      'Возврат денег за товар',
+      'Возврат денег за услугу',
+      'Нарушение условий договора',
+      'Помощь в спорах с маркетплейсами',
+      'Помощь в туристических спорах',
+      'Помощь в спорах с банками',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '03',
+    title: 'Семейный юрист',
+    items: [
+      'Расторжение брака',
+      'Раздел имущества и активов',
+      'Раздел ипотеки и кредитов',
+      'Споры о детях',
+      'Споры по алиментам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '04',
+    title: 'Жилищный юрист',
+    items: [
+      'Споры по праву собственности',
+      'Споры по вселению и выселению',
+      'Споры с УК и ТСЖ',
+      'Помощь при заливе квартиры',
+      'Определение порядка пользования квартирой',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '05',
+    title: 'Наследственный юрист',
+    items: [
+      'Раздел имущества',
+      'Оспаривание завещания',
+      'Восстановление сроков вступления',
+      'Признание наследника недостойным',
+      'Помощь при наследстве с долгами',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '06',
+    title: 'Защита прав дольщиков',
+    items: [
+      'Расторжение договора',
+      'Взыскание неустойки по ДДУ',
+      'Банкротство застройщика',
+      'Квартира ненадлежащего качества',
+      'Проверка застройщика',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '07',
+    title: 'Трудовой юрист',
+    items: [
+      'Незаконное увольнение',
+      'Задержка / невыплата зарплаты',
+      'Восстановление на работе',
+      'Производственная травма',
+      'Жалоба на работодателя',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '08',
+    title: 'Медицинский юрист',
+    items: [
+      'Споры с гос. медучреждениями',
+      'Споры с частными клиниками',
+      'Споры с косметологией',
+      'Споры со стоматологией',
+      'Навязанный кредит в медклинике',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+  {
+    id: '09',
+    title: 'Финансовый юрист',
+    items: [
+      'Возврат денег из КПК',
+      'Возврат денег от брокера',
+      'Возврат денег из криптовалют',
+      'Возврат денег с форекс рынков',
+      'Возврат денег с онлайн казино',
+      'Услуги кредитного юриста',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/lawyer_1.png', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/lawyer_2.png', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/lawyer_3.png', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 3,
+    href: '#',
+  },
+]
+
+const stats = [
+  {
+    value: '210+',
+    title: 'защищенных дел',
+    desc: 'Текстовое описание',
+  },
+  {
+    value: '10+',
+    title: 'направлений',
+    desc: 'Текстовое описание',
+  },
+  {
+    value: '12+',
+    title: 'лет опыта работы',
+    desc: 'Текстовое описание',
+  },
+  {
+    value: '10000+',
+    title: 'сбереженных клиенточасов',
+    desc: 'сбереженных клиенточасов',
+  },
+]
+
+const advantages = [
+  {
+    title: 'Каждое дело застраховано на 10 млн ₽',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе.',
+  },
+  {
+    title: 'Риски увеличения сроков судебного дела берем на себя',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе.',
+  },
+  {
+    title: 'Риски увеличения сроков судебного дела берем на себя',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе.',
+  },
+  {
+    title: 'Рассрочка платежа',
+    desc: 'Юридическая поддержка клиентов на любой стадии в процессе.',
+  },
+]
+---
+
+<!-- Services -->
+<Section name="services">
+  <!-- Header -->
+  <div class="services__header">
+    <H2>Услуги</H2>
+    <P>
+      Чёткая стратегия решения правовых вопросов, прозрачные условия работы и
+      безусловное соблюдение адвокатской тайны.
+    </P>
+  </div>
+
+  <!-- List of services -->
+  <div class="services__list">
+    {services.map((service) => <ServiceCard service={service} />)}
+
+    <div class="services__list-desc">
+      <p>
+        Григорьев и Партнёры — команда юристов и адвокатов с более чем 20-летним
+        опытом юридической практики. Оказываем комплексную правовую помощь
+        бизнесу и частным клиентам в Москве и Московской области.
+      </p>
+    </div>
+  </div>
+
+  <!-- Statistics -->
+  <div class="services__statistics">
+    {
+      stats.map((stat) => (
+        <div class="services__stat">
+          <div
+            class="services__stat-value"
+            data-count={parseInt(stat.value)}
+            data-suffix={stat.value.replace(/[0-9]/g, '')}
+          >
+            0
+          </div>
+          <div class="services__stat-title">{stat.title}</div>
+          <div class="services__stat-desc">{stat.desc}</div>
+          <a href="#" class="services__stat-btn">
+            <Icon name="tabler:chevron-right" />
+          </a>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Advantages -->
+  <div class="services__advantages">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {
+          advantages.map((adv) => (
+            <div class="services__advantage swiper-slide">
+              <div class="services__advantage-title">{adv.title}</div>
+              <div class="services__advantage-desc">{adv.desc}</div>
+              <div class="services__advantage-icon">
+                <svg
+                  width="27"
+                  height="24"
+                  viewBox="0 0 27 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.48942 17.1306C1.11683 17.1306 0 15.9988 0 14.6077V14.4296H4.97884V14.6077C4.97884 15.9988 3.862 17.1306 2.48942 17.1306ZM2.03128 13.4237H0.27139L2.49034 6.46756L4.70837 13.4237H2.94848L2.49034 11.986L2.0322 13.4237H2.03128ZM27 14.4296V14.6077C27 15.9988 25.8832 17.1306 24.5106 17.1306C23.138 17.1306 22.0212 15.9988 22.0212 14.6077V14.4296H27ZM24.0524 13.4237H22.2925L24.5106 6.46756L26.7295 13.4237H24.9696L24.5115 11.986L24.0534 13.4237H24.0524ZM2.3137 22.3022H24.6872V24H2.3137V22.3022ZM6.8896 4.45094H2.32383V2.75317H8.56393V18.6326H6.88868V4.45094H6.8896ZM14.7001 3.59226C15.5115 3.21467 16.3763 2.96108 17.2714 2.83894L17.471 2.8119V4.52179L17.3229 4.54603C16.8298 4.62528 16.3615 4.74742 15.931 4.90964L15.8234 4.94973L15.7433 4.86582C15.4149 4.52366 15.0534 4.19734 14.666 3.89434L14.4361 3.7144L14.7001 3.59133V3.59226ZM8.72033 1.69777H2.32475V0H8.72033C10.4609 0 12.1803 0.443788 13.6992 1.28568C15.2189 0.444721 16.9384 0 18.678 0H24.6872V1.69777H18.678C16.931 1.69777 15.2429 2.22081 13.7967 3.21001L13.6982 3.27713L13.5998 3.21001C12.1536 2.22081 10.4664 1.69777 8.71941 1.69777H8.72033ZM24.6872 4.45094H20.1159V18.6326H18.4407V2.75317H24.6863V4.45094H24.6872ZM18.4839 19.4931H24.6872V21.1909H18.4839C16.7047 21.1909 14.9853 20.6697 13.5032 19.6824C12.0202 20.6697 10.3017 21.1909 8.52622 21.1909H2.31462V19.4931H8.52622C9.78473 19.4931 11.0221 19.1677 12.1196 18.5496C10.3809 16.8201 9.38822 14.4362 9.38822 11.972C9.38822 9.50789 10.3809 7.12486 12.1205 5.39539C11.3597 4.96558 10.5419 4.67936 9.68537 4.5423L9.53633 4.519V2.81004L9.73597 2.83708C14.2318 3.44589 17.6228 7.37285 17.6228 11.972C17.6228 14.0642 16.9439 16.0388 15.6596 17.6825L15.5676 17.8L15.4379 17.7292C15.034 17.5091 14.6559 17.2471 14.3128 16.9516L14.1812 16.8388L14.2898 16.7036C15.3588 15.3685 15.9476 13.6884 15.9476 11.972C15.9476 9.85098 15.0598 7.83063 13.506 6.40323C11.9512 7.83063 11.0626 9.85192 11.0626 11.972C11.0626 16.119 14.3919 19.4931 18.4839 19.4931Z"
+                    fill="#005A87"
+                  />
+                </svg>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .services {
+    position: relative;
+    padding: rem(80) 0;
+    background-color: #f9fafb;
+
+    .container {
+      gap: rem(40) !important;
+    }
+
+    &__header {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(40) rem(12);
+      align-items: end;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+      @include media('sm') {
+        gap: rem(32);
+      }
+
+      .text-h2 {
+        margin-bottom: -0.1875em;
+        grid-column: span 1;
+      }
+
+      .text-p {
+        grid-column: span 2;
+      }
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(12);
+
+      @include media('xl') {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @include media('lg') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include media('sm') {
+        grid-template-columns: 1fr;
+      }
+
+      & > * {
+        &:nth-child(6n + 1) {
+          grid-column-start: 2;
+
+          @include media('xl') {
+            grid-column-start: 1 !important;
+          }
+        }
+      }
+
+      &-desc {
+        margin-top: rem(80);
+        grid-column-start: 2;
+        grid-column-end: 5;
+
+        @include media('xl') {
+          margin-top: rem(60);
+          grid-column: span 3;
+        }
+
+        @include media('lg') {
+          margin-top: rem(40);
+          grid-column: span 2;
+        }
+        @include media('sm') {
+          margin-top: rem(32);
+          grid-column: span 1;
+        }
+
+        p {
+          font-size: clamp(1.375rem, 1.0326rem + 1.5217vw, 2.25rem);
+          font-weight: 700;
+        }
+      }
+    }
+
+    &__statistics {
+      width: 100%;
+      margin-top: rem(80);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(12);
+
+      @include media('md') {
+        margin-top: rem(40);
+        grid-template-columns: repeat(2, 1fr);
+        gap: rem(40);
+      }
+
+      @include media('sm') {
+        margin-top: rem(20);
+        grid-template-columns: repeat(2, 1fr);
+        gap: rem(40) rem(16);
+      }
+    }
+
+    &__stat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &:nth-child(even) {
+        margin-top: rem(80);
+
+        @include media('md') {
+          margin-top: 0;
+        }
+      }
+
+      &-value {
+        font-size: rem(80);
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: rem(8);
+        color: var(--primary);
+
+        @include media('md') {
+          font-size: rem(60);
+        }
+        @include media('sm') {
+          font-size: rem(40);
+        }
+      }
+
+      &-title {
+        font-size: rem(24);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: rem(4);
+        color: var(--text-dark, #161e28);
+
+        @include media('sm') {
+          font-size: rem(20);
+        }
+      }
+
+      &-desc {
+        font-size: rem(16);
+        color: var(--gray, #686868);
+        margin-bottom: rem(12);
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+
+      &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: rem(56);
+        height: rem(28);
+        background-color: var(--primary, #005a87);
+        color: #ffffff;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+
+        @include media('sm') {
+          display: none;
+        }
+
+        &:hover {
+          background-color: var(--primary-hover, #004a6f);
+          transform: scale(1.05);
+        }
+
+        svg {
+          width: rem(20);
+          height: rem(20);
+        }
+      }
+    }
+
+    &__advantages {
+      margin-top: rem(80);
+      height: rem(400);
+      width: 100%;
+
+      @include media('lg') {
+        margin-top: rem(40);
+      }
+      @include media('sm') {
+        margin-top: rem(20);
+        height: rem(340);
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+
+        @include media('xl') {
+          overflow: visible;
+        }
+      }
+
+      .swiper-slide {
+        @include media('xl') {
+          width: rem(320);
+        }
+      }
+    }
+
+    &__advantage {
+      position: relative;
+      height: 100%;
+      background-color: var(--primary, #005a87);
+      padding: rem(28);
+      border-radius: rem(12);
+      color: #ffffff;
+      overflow: hidden;
+      min-height: rem(320);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: rem(12);
+
+      @include media('xs') {
+        padding: rem(24);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translate(-30%, 30%);
+        width: rem(138);
+        height: rem(138);
+        border-radius: 50%;
+        background-color: #ffdca1;
+        pointer-events: none;
+      }
+
+      &-title {
+        position: relative;
+        font-size: rem(24);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      &-desc {
+        position: relative;
+        font-size: rem(16);
+        line-height: 1.3;
+        color: #ffffff;
+      }
+
+      &-icon {
+        position: relative;
+        margin-top: auto;
+
+        svg {
+          width: rem(24);
+          height: rem(24);
+        }
+      }
+    }
+  }
+</style>

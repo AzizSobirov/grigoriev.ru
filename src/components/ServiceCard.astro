@@ -1,0 +1,250 @@
+---
+// import { Icon } from 'ui'
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  service: {
+    id: string
+    title: string
+    items: string[]
+    lawyers: { src: string; alt: string }[]
+    extraLawyers: number
+    href: string
+  }
+}
+
+const { service } = Astro.props
+---
+
+<div class="service-card">
+  <a href={service.href} class="service-card__link"></a>
+
+  <div class="service-card__badge">
+    {service.id}
+  </div>
+
+  <div class="service-card__title">{service.title}</div>
+
+  <ul class="service-card__list">
+    {service.items.map((item) => <li class="service-card__item">{item}</li>)}
+  </ul>
+
+  <div class="service-card__footer">
+    <div class="service-card__lawyers">
+      {
+        service.lawyers.slice(0, 3).map((lawyer) => (
+          <div class="service-card__lawyer">
+            <img src={lawyer.src} alt={lawyer.alt} />
+          </div>
+        ))
+      }
+      {
+        service.extraLawyers > 0 && (
+          <div class="service-card__lawyer service-card__lawyer--extra">
+            +{service.extraLawyers}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="service-card__arrow">
+      <Icon name="tabler:chevron-right-filled" />
+      <!-- <Icon src="arrow-right.svg" /> -->
+    </div>
+  </div>
+</div>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .service-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: rem(12);
+    padding: rem(24);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+
+    @include media('sm') {
+      padding: rem(20);
+    }
+
+    &:hover {
+      background-color: var(--primary, #005a87);
+      box-shadow: 0 12px 30px rgba(0, 90, 135, 0.2);
+      border-color: transparent;
+
+      .service-card__badge {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: #ffffff;
+      }
+
+      .service-card__title {
+        color: #ffffff;
+      }
+
+      .service-card__item {
+        color: #ffffff;
+
+        &::before {
+          background-color: #ffffff;
+        }
+      }
+
+      .service-card__lawyer {
+        border-color: #fff;
+
+        &--extra {
+          background-color: var(--primary, #005a87);
+          border-color: #ffffff;
+          color: #ffffff;
+        }
+      }
+
+      .service-card__arrow {
+        color: #ffffff;
+        transform: scale(1.1);
+      }
+    }
+
+    &__link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+
+    &__badge {
+      margin-bottom: rem(8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary, #005a87);
+      color: #ffffff;
+      font-size: rem(16);
+      letter-spacing: 1.1;
+      padding: rem(2) rem(18);
+      border-radius: 9999px;
+      width: fit-content;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    &__title {
+      font-family: var(--font-primary);
+      font-size: rem(24);
+      font-weight: 700;
+      margin-bottom: rem(16);
+      line-height: 1.1;
+      color: var(--text-dark, #161e28);
+      transition: all 0.3s ease;
+
+      @include media('sm') {
+        font-size: rem(20);
+      }
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 rem(32) 0;
+      flex-grow: 1;
+    }
+
+    &__item {
+      position: relative;
+      padding-left: rem(20);
+      font-size: rem(16);
+      color: var(--gray, #686868);
+      margin-bottom: rem(14);
+      line-height: 1.4;
+      transition: color 0.3s ease;
+
+      @include media('sm') {
+        margin-bottom: rem(8);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: rem(5);
+        height: rem(5);
+        background-color: var(--primary, #005a87);
+        border-radius: rem(1); // Square bullets as in Figma
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    &__lawyers {
+      display: flex;
+      align-items: center;
+    }
+
+    &__lawyer {
+      width: rem(48);
+      height: rem(48);
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      overflow: hidden;
+      margin-right: rem(-16);
+      background-color: #f3f4f6;
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color 0.3s ease;
+
+      @include media('sm') {
+        width: rem(40);
+        height: rem(40);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      &--extra {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: rem(16);
+        color: #d78a5f;
+        background-color: #ffffff;
+        border: 1px solid #d78a5f;
+        margin-right: 0;
+        z-index: 1;
+        transition: all 0.3s ease;
+      }
+    }
+
+    &__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      svg {
+        width: rem(20);
+        height: rem(20);
+      }
+    }
+  }
+</style>
