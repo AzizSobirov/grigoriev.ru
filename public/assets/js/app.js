@@ -207,6 +207,21 @@ let stepsSwiper = new Swiper('.steps .swiper', {
   },
 })
 
+let topnewsSwiper = new Swiper('.topnews .swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 12,
+  breakpoints: {
+    1025: {
+      slidesPerView: 3,
+      spaceBetween: 12,
+    },
+    1280: {
+      slidesPerView: 4,
+      spaceBetween: 12,
+    },
+  },
+})
+
 let reviewsGeneralSwiper = new Swiper('.reviews__general .swiper', {
   slidesPerView: 'auto',
   spaceBetween: 12,
