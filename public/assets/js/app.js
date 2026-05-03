@@ -207,24 +207,40 @@ let stepsSwiper = new Swiper('.steps .swiper', {
   },
 })
 
-let reviewsSwiper = new Swiper('.reviews .reviews__swiper .swiper', {
+let reviewsGeneralSwiper = new Swiper('.reviews__general .swiper', {
   slidesPerView: 'auto',
   spaceBetween: 12,
-  navigation: {
-    nextEl: '.reviews .swiper-button-next',
-    prevEl: '.reviews .swiper-button-prev',
-  },
+  freeMode: true,
+  watchSlidesProgress: true,
   breakpoints: {
-    475: {
-      spaceBetween: 15,
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 12,
     },
     1025: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    1340: {
       slidesPerView: 3,
-      spaceBetween: 20,
+      spaceBetween: 12,
+    },
+    1280: {
+      slidesPerView: 4,
+      spaceBetween: 12,
+    },
+  },
+})
+
+let reviewsMapSwiper = new Swiper('.reviews__map .swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 12,
+  freeMode: true,
+  watchSlidesProgress: true,
+  breakpoints: {
+    1025: {
+      slidesPerView: 2,
+      spaceBetween: 12,
+    },
+    1280: {
+      slidesPerView: 3,
+      spaceBetween: 12,
     },
   },
 })
