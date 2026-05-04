@@ -11,5 +11,6 @@ export { default as ReviewsList } from "./ReviewsList.astro";
 export { default as Service } from "./Service.astro";
 export { default as Services } from "./Services.astro";
 export { default as Steps } from "./Steps.astro";
+export { default as Team } from "./Team.astro";
 export { default as TopNews } from "./TopNews.astro";
 export { default as TopServices } from "./TopServices.astro";

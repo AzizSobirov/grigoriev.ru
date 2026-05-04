@@ -1,0 +1,675 @@
+---
+import ServiceCard from '@/components/ServiceCard.astro'
+import ProtectionCard from '@/components/ProtectionCard.astro'
+import { Section, H2, H3, P, Image, Button } from 'ui'
+import { Icon } from 'astro-icon/components'
+
+const navItems = [
+  { name: 'О нас', id: 'about', active: true },
+  { name: 'Предоставляем услуги', id: 'services', active: false },
+  { name: 'Команда', id: 'team', active: false },
+  { name: 'Достижения', id: 'achievements', active: false },
+]
+
+const services = [
+  {
+    id: '01',
+    title: 'Автоюрист / Автоадвокат',
+    items: [
+      'Возврат водительских прав',
+      'Юрист по ДТП',
+      'Юрист по ОСАГО / КАСКО',
+      'Споры по каршерингу',
+      'Независимая автоэкспертиза',
+      'Автоадвокат по уголовным делам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '02',
+    title: 'Защита прав потребителей',
+    items: [
+      'Возврат денег за товар',
+      'Возврат денег за услугу',
+      'Нарушение условий договора',
+      'Помощь в спорах с маркетплейсами',
+      'Помощь в туристических спорах',
+      'Помощь в спорах с банками',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '03',
+    title: 'Семейный юрист',
+    items: [
+      'Расторжение брака',
+      'Раздел имущества и активов',
+      'Раздел ипотеки и кредитов',
+      'Споры о детях',
+      'Споры по алиментам',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '04',
+    title: 'Жилищный юрист',
+    items: [
+      'Споры по праву собственности',
+      'Споры по вселению и выселению',
+      'Споры с УК и ТСЖ',
+      'Помощь при заливе квартиры',
+      'Определение порядка пользования квартирой',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '05',
+    title: 'Наследственный юрист',
+    items: [
+      'Раздел имущества',
+      'Оспаривание завещания',
+      'Восстановление сроков вступления',
+      'Признание наследника недостойным',
+      'Помощь при наследстве с долгами',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '06',
+    title: 'Защита прав дольщиков',
+    items: [
+      'Расторжение договора',
+      'Взыскание неустойки по ДДУ',
+      'Банкротство застройщика',
+      'Квартира ненадлежащего качества',
+      'Проверка застройщика',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '07',
+    title: 'Трудовой юрист',
+    items: [
+      'Незаконное увольнение',
+      'Задержка / невыплата зарплаты',
+      'Восстановление на работе',
+      'Производственная травма',
+      'Жалоба на работодателя',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '08',
+    title: 'Медицинский юрист',
+    items: [
+      'Споры с гос. медучреждениями',
+      'Споры с частными клиниками',
+      'Споры с косметологией',
+      'Споры со стоматологией',
+      'Навязанный кредит в медклинике',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+  {
+    id: '09',
+    title: 'Финансовый юрист',
+    items: [
+      'Возврат денег из КПК',
+      'Возврат денег от брокера',
+      'Возврат денег из криптовалют',
+      'Возврат денег с форекс рынков',
+      'Возврат денег с онлайн казино',
+      'Услуги кредитного юриста',
+    ],
+    lawyers: [
+      { src: '/assets/img/lawyers/1.jpg', alt: 'Lawyer 1' },
+      { src: '/assets/img/lawyers/2.jpg', alt: 'Lawyer 2' },
+      { src: '/assets/img/lawyers/3.jpg', alt: 'Lawyer 3' },
+    ],
+    extraLawyers: 2,
+    href: '#',
+  },
+]
+
+const lawyers = [
+  {
+    id: '01/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/1.jpg',
+  },
+  {
+    id: '02/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/2.jpg',
+  },
+  {
+    id: '03/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/3.jpg',
+  },
+  {
+    id: '02/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/2.jpg',
+  },
+  {
+    id: '03/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/3.jpg',
+  },
+]
+---
+
+<!-- Team -->
+<Section name="team">
+  <div class="team__title-wrap">
+    <H2>Григорьев и Партнеры</H2>
+  </div>
+
+  <div class="wrapper">
+    <aside class="team__sidebar">
+      <nav class="filter-list" aria-label="Навигация по странице">
+        {
+          navItems.map((item) => (
+            <a
+              class:list={['filter-item', { 'is-active': item.active }]}
+              href={`#${item.id}`}
+              data-nav-item
+            >
+              <span>{item.name}</span>
+              <Icon name="tabler:arrow-down" class="icon-arrow" />
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="team__filter-swiper swiper">
+        <div class="swiper-wrapper">
+          {
+            navItems.map((item) => (
+              <a
+                class:list={['swiper-slide', { 'is-active': item.active }]}
+                href={`#${item.id}`}
+                data-nav-item
+              >
+                {item.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="team__content">
+      <!-- About -->
+      <div id="about" class="team-block scroll-mt" data-section="about">
+        <div class="about-text-grid">
+          <div class="text-h3">О нас</div>
+          <div class="about-content">
+            <p>
+              Впервые в суд Российской Федерации мы обратились по спору о
+              правомерности привлечения к ответственности за недобросовестную
+              конкуренцию транснациональной компании «Аста» против Федеральной
+              антимонопольной службой.
+            </p>
+            <p>
+              Антимонопольный орган установил, что «Аста» совершила акт
+              недобросовестной конкуренции, запросив базу данных согласия врача
+              на препарат, при производстве и реализации которого использовалось
+              изобретение, защищенное евразийским патентом компании Pfizer
+              (Pfizer Pharmaceuticals Group). ФАС России также постановила
+              перечислить в бюджет незаконно полученный доход в размере более
+              515 млн рублей.
+            </p>
+            <p>
+              Ранее суды трех инстанций посчитали необоснованным решение
+              антимонопольного органа и отменили его. Верховный суд поддержал
+              позицию ФАС России, согласился с доводами заявителей и отменил
+              решения нижестоящих судов, оставив в силе акты антимонопольного
+              органа.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div
+        id="services"
+        class="team-block scroll-mt team-block--transparent"
+        data-section="services"
+      >
+        <div class="text-h3">Предоставляем услуги</div>
+        <div class="services-grid">
+          {services.map((service) => <ServiceCard service={service} />)}
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div
+        id="team"
+        class="team-block scroll-mt team-block--transparent"
+        data-section="team"
+      >
+        <H2>Команда профессионалов</H2>
+        <div class="team__lawyers-swiper">
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              {
+                lawyers.map((lawyer) => (
+                  <div class="swiper-slide lawyer-card">
+                    <div class="lawyer-card__img">
+                      <Image src={lawyer.image} alt={lawyer.name} />
+                    </div>
+                    <div class="lawyer-card__content">
+                      <div class="lawyer-card__id">{lawyer.id}</div>
+                      <div class="lawyer-card__name">{lawyer.name}</div>
+                      <div class="lawyer-card__role">{lawyer.role}</div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .team {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      max-height: rem(1064);
+      background: linear-gradient(180deg, #f1f1f1 0%, #deb9a4 100%);
+      z-index: -1;
+    }
+
+    .container {
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(32);
+      }
+    }
+
+    &__title-wrap {
+      margin-bottom: rem(40);
+      @include media('sm') {
+        margin-bottom: 0;
+      }
+      .text-h2 {
+        font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
+        line-height: 1.2;
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(20);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      width: 100%;
+      overflow: hidden;
+
+      @media (min-width: 1025px) {
+        position: sticky;
+        top: rem(80);
+      }
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        @include media('lg') {
+          display: none;
+        }
+      }
+
+      .filter-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(12) rem(16);
+        background: #ffffff;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        color: var(--text-dark, #161e28);
+
+        span {
+          font-size: rem(14);
+          font-weight: 500;
+        }
+
+        .icon-arrow {
+          width: rem(18);
+          height: rem(18);
+          opacity: 0.6;
+          transition: transform 0.3s ease;
+        }
+
+        &.is-active {
+          background: var(--primary, #005a87);
+          color: #ffffff;
+
+          .icon-arrow {
+            opacity: 1;
+            transform: rotate(-90deg);
+          }
+        }
+
+        &:hover:not(.is-active) {
+          background: #e8e8e8;
+        }
+      }
+    }
+
+    &__filter-swiper {
+      width: 100%;
+      display: none;
+
+      @include media('lg') {
+        display: block;
+        overflow: visible;
+      }
+
+      .swiper-slide {
+        padding: rem(8) rem(16);
+        width: fit-content !important;
+        font-size: rem(15);
+        transition: all 0.3s ease;
+        border: rem(1) solid rgb(104, 104, 104, 0.2);
+        border-radius: rem(8);
+        cursor: pointer;
+        background: #ffffff;
+
+        &.is-active {
+          background: var(--primary);
+          color: #fff;
+          border-color: var(--primary);
+        }
+      }
+    }
+
+    &__content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(25);
+      }
+    }
+
+    .team-block {
+      width: 100%;
+      background: #fff;
+      border-radius: rem(10);
+      padding: rem(32);
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: rem(20);
+
+      @include media('sm') {
+        padding: rem(24);
+      }
+      @include media('xs') {
+        padding: rem(20);
+        gap: rem(10);
+      }
+
+      &--transparent {
+        background: transparent;
+        padding: 0;
+      }
+
+      .text-h3,
+      .text-h2 {
+        margin-bottom: rem(24);
+
+        @include media('sm') {
+          margin-bottom: rem(20);
+        }
+      }
+    }
+
+    .scroll-mt {
+      scroll-margin-top: rem(100);
+      @include media('lg') {
+        scroll-margin-top: rem(80);
+      }
+    }
+
+    // About grid
+    .about-text-grid {
+      display: grid;
+      grid-template-columns: rem(280) 1fr;
+      gap: rem(40);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+        gap: rem(20);
+      }
+
+      .text-h3 {
+        margin-bottom: 0;
+        font-size: rem(20);
+        font-weight: 700;
+      }
+
+      .about-content {
+        display: flex;
+        flex-direction: column;
+        gap: rem(20);
+        font-size: rem(16);
+        line-height: 1.4;
+        color: var(--text-dark, #161e28);
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+    }
+
+    // Services grid
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(12);
+
+      @include media('xl') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include media('sm') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    // Lawyers swiper
+    &__lawyers-swiper {
+      width: 100%;
+      display: grid;
+      overflow: hidden;
+
+      .swiper {
+        width: 100%;
+
+        .swiper-wrapper {
+          min-width: 0 !important;
+        }
+      }
+
+      .swiper-slide {
+        width: rem(360);
+        height: auto;
+
+        @include media('sm') {
+          width: 85%;
+        }
+      }
+    }
+
+    .lawyer-card {
+      display: flex;
+      flex-direction: column;
+
+      &__img {
+        width: 100%;
+        height: rem(420);
+        background: #d5865e; // Match the orange background from the screenshot
+        border-radius: rem(12);
+        overflow: hidden;
+
+        @include media('sm') {
+          height: rem(320);
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: bottom;
+        }
+      }
+
+      &__content {
+        display: flex;
+        flex-direction: column;
+        padding-top: rem(16);
+        color: var(--text-dark, #161e28);
+      }
+
+      &__id {
+        font-size: rem(14);
+        color: var(--gray, #686868);
+        margin-bottom: rem(8);
+      }
+
+      &__name {
+        font-size: rem(24);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: rem(12);
+
+        @include media('sm') {
+          font-size: rem(20);
+        }
+      }
+
+      &__role {
+        font-size: rem(14);
+        color: var(--text-dark, #161e28);
+
+        @include media('sm') {
+          font-size: rem(13);
+        }
+      }
+    }
+
+    // Projects grid
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(12);
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+      }
+
+      .protection-card {
+        min-height: rem(260);
+
+        .protection-card__arrow svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+  }
+</style>
