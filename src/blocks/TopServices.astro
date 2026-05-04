@@ -1,0 +1,104 @@
+---
+import { Section, H2 } from 'ui'
+import ProtectionCard from '@/components/ProtectionCard.astro'
+
+interface Props {
+  title?: string
+}
+
+const { title = 'Другие проекты' } = Astro.props
+
+const projects = [
+  {
+    id: '1 / 50',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества...',
+    href: '#',
+  },
+  {
+    id: '2 / 50',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '3 / 50',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества...',
+    href: '#',
+  },
+]
+---
+
+<!-- Topservices -->
+<Section name="topservices">
+  <H2>{title}</H2>
+
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      {
+        projects.map((item) => (
+          <div class="swiper-slide">
+            <ProtectionCard
+              index={item.id}
+              title={item.title}
+              desc={item.description}
+              href={item.href}
+              variant="white"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .topservices {
+    position: relative;
+    padding: rem(80) 0;
+    background: #f2f2f2;
+
+    @include media('lg') {
+      padding: rem(60) 0;
+    }
+    @include media('sm') {
+      padding: rem(40) 0;
+    }
+
+    .container {
+      gap: rem(40) !important;
+
+      @include media('sm') {
+        gap: rem(32) !important;
+      }
+    }
+
+    .swiper {
+      width: 100%;
+
+      @include media('lg') {
+        overflow: visible;
+      }
+    }
+
+    .swiper-slide {
+      height: auto;
+
+      @include media('lg') {
+        width: rem(360);
+      }
+      @include media('sm') {
+        width: rem(320);
+      }
+    }
+  }
+</style>

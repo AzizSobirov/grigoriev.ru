@@ -1,0 +1,468 @@
+---
+import { Section, H2, H3, P, Image, Button } from 'ui'
+import ProtectionCard from '@/components/ProtectionCard.astro'
+import { Icon } from 'astro-icon/components'
+
+const navItems = [
+  { name: 'Проблема', id: 'problem', active: true },
+  { name: 'Решение', id: 'solution', active: false },
+  { name: 'Результат', id: 'result', active: false },
+  { name: 'Адвокаты', id: 'lawyers', active: false },
+]
+
+const lawyers = [
+  {
+    id: '01/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/1.jpg',
+  },
+  {
+    id: '02/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/1.jpg',
+  },
+]
+---
+
+<!-- Project -->
+<Section name="project">
+  <div class="project__title-wrap">
+    <H2
+      >Сохранено право собственности на долю в квартире клиента и увеличен
+      размер денежной компенсации</H2
+    >
+  </div>
+
+  <div class="wrapper">
+    <aside class="project__sidebar">
+      <nav class="filter-list" aria-label="Навигация по проекту">
+        {
+          navItems.map((item) => (
+            <a
+              class:list={['filter-item', { 'is-active': item.active }]}
+              href={`#${item.id}`}
+              data-nav-item
+            >
+              <span>{item.name}</span>
+              <Icon name="tabler:arrow-down" class="icon-arrow" />
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="project__filter-swiper swiper">
+        <div class="swiper-wrapper">
+          {
+            navItems.map((item) => (
+              <a
+                class:list={['swiper-slide', { 'is-active': item.active }]}
+                href={`#${item.id}`}
+                data-nav-item
+              >
+                {item.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="project__content">
+      <div id="problem" class="project-block scroll-mt" data-section="problem">
+        <H3>Проблема клиента</H3>
+        <div class="text-p">
+          <p>
+            Верховный суд Российской Федерации рассмотрел спор о правомерности
+            привлечения к ответственности за недобросовестную конкуренцию
+            производителя дженериков «Аксельфарм» Федеральной антимонопольной
+            службой.
+          </p>
+          <p>
+            Антимонопольный орган установил, что «Аксельфарм» скопировал акт
+            недобросовестной конкуренции, введя в оборот без согласия
+            правообладателя препарат, при производстве и реализации которого
+            использовалось изобретение, защищенное евразийским патентом компании
+            Aquarian Pharmaceuticals (группа Pfizer). ФАС России также
+            постановила перечислить в бюджет незаконно полученный доход в
+            размере более 663 млн рублей.
+          </p>
+          <p>
+            Ранее суды трех инстанций посчитали необоснованным решение
+            антимонопольного органа и отменили его. Верховный суд поддержал
+            позицию ФАС России, согласился с доводами заявителей и отменил
+            решения нижестоящих судов, оставив в силе акты антимонопольного
+            органа.
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="solution"
+        class="project-block scroll-mt"
+        data-section="solution"
+      >
+        <H3>Решение</H3>
+        <div class="text-p">
+          <p>
+            Ранее суды трех инстанций посчитали необоснованным решение
+            антимонопольного органа и отменили его. Верховный суд поддержал
+            позицию ФАС России, согласился с доводами заявителей и отменил
+            решения нижестоящих судов, оставив в силе акты антимонопольного
+            органа.
+          </p>
+          <p>
+            Вынесенное решение высшей судебной инстанции станет прецедентным для
+            правоприменительной практики, поскольку затрагивает ключевые вопросы
+            применения статьи 14.5 закона «О защите конкуренции» в спорах,
+            связанных с выводом дженериков на рынок до истечения срока действия
+            патентов на щиты.
+          </p>
+          <p>
+            Команда ALUMNI Partners сопровождала ООО «Пфайзер Инновации» в судах
+            апелляционной и кассационной инстанций, а также в Верховном суде.
+            Юристы фирмы разработали стратегию защиты, подготовили жалобы и иные
+            процессуальные документы, а также представляли интересы клиента в
+            судебных заседаниях.
+          </p>
+          <p>
+            Команда ALUMNI Partners работала под руководством партнеров Николая
+            Вознесенского, Елены Трусовой и Виталия Дианова. Над проектом также
+            работали:
+          </p>
+        </div>
+      </div>
+
+      <div id="result" class="project-block scroll-mt" data-section="result">
+        <H3>Результат</H3>
+        <div class="text-p">
+          <p>
+            Команда ALUMNI Partners сопровождала ООО «Пфайзер Инновации» в судах
+            апелляционной и кассационной инстанций, а также в Верховном суде.
+            Юристы фирмы разработали стратегию защиты, подготовили жалобы и иные
+            процессуальные документы, а также представляли интересы клиента в
+            судебных заседаниях.
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="lawyers"
+        class="project-block project-block-vertical scroll-mt"
+        data-section="lawyers"
+      >
+        <H3>Адвокаты в этом направлении</H3>
+        <div class="lawyers-grid">
+          {
+            lawyers.map((lawyer) => (
+              <div class="lawyer-card">
+                <div class="lawyer-card__img">
+                  <Image src={lawyer.image} alt={lawyer.name} />
+                </div>
+                <div class="lawyer-card__content">
+                  <div class="lawyer-card__top">
+                    <span class="lawyer-card__id">{lawyer.id}</span>
+                    <div class="lawyer-card__name">{lawyer.name}</div>
+                  </div>
+                  <div class="lawyer-card__role">{lawyer.role}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .project {
+    position: relative;
+    padding: rem(80) 0 rem(40) !important;
+    background: #f2f2f2;
+
+    @include media('lg') {
+      padding: rem(60) 0 rem(30) !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 rem(20) !important;
+    }
+
+    .container {
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(32);
+      }
+    }
+
+    &__title-wrap {
+      margin-bottom: rem(40);
+      @include media('sm') {
+        margin-bottom: 0;
+      }
+      .text-h2 {
+        font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
+        line-height: 1.2;
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(20);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      width: 100%;
+      overflow: hidden;
+
+      @media (min-width: 1025px) {
+        position: sticky;
+        top: rem(80);
+      }
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        @include media('lg') {
+          display: none;
+        }
+      }
+
+      .filter-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(12) rem(16);
+        background: #ffffff;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        color: var(--text-dark, #161e28);
+
+        span {
+          font-size: rem(14);
+          font-weight: 500;
+        }
+
+        .icon-arrow {
+          width: rem(18);
+          height: rem(18);
+          opacity: 0.6;
+          transition: transform 0.3s ease;
+        }
+
+        &.is-active {
+          background: var(--primary, #005a87);
+          color: #ffffff;
+
+          .icon-arrow {
+            opacity: 1;
+            transform: rotate(-90deg);
+          }
+        }
+
+        &:hover:not(.is-active) {
+          background: #e8e8e8;
+        }
+      }
+    }
+
+    &__filter-swiper {
+      width: 100%;
+      display: none;
+
+      @include media('lg') {
+        display: block;
+        overflow: visible;
+      }
+
+      .swiper-slide {
+        padding: rem(8) rem(16);
+        width: fit-content !important;
+        font-size: rem(15);
+        transition: all 0.3s ease;
+        border: rem(1) solid rgb(104, 104, 104, 0.2);
+        border-radius: rem(8);
+        cursor: pointer;
+        background: #ffffff;
+
+        &.is-active {
+          background: var(--primary);
+          color: #fff;
+          border-color: var(--primary);
+        }
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(25);
+      }
+    }
+
+    .project-block {
+      background: #fff;
+      border-radius: rem(10);
+      padding: rem(32);
+      display: flex;
+      align-items: flex-start;
+      gap: rem(25);
+
+      @include media('lg') {
+        flex-direction: column;
+      }
+      @include media('sm') {
+        padding: rem(24);
+      }
+      @include media('xs') {
+        padding: rem(20);
+        gap: rem(20);
+      }
+
+      .text-h3 {
+        flex: 1 0 rem(280);
+
+        @include media('lg') {
+          flex-basis: 0;
+        }
+      }
+
+      .text-p {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: rem(16);
+        font-size: rem(16);
+        line-height: 1.5;
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+
+      &-vertical {
+        flex-direction: column;
+
+        .text-h3 {
+          flex-basis: 0;
+          flex-grow: 0;
+        }
+      }
+    }
+
+    .scroll-mt {
+      scroll-margin-top: rem(100);
+      @include media('lg') {
+        scroll-margin-top: rem(80);
+      }
+    }
+
+    // Lawyers grid
+    .lawyers-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      gap: rem(8);
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+        gap: rem(12);
+      }
+    }
+
+    .lawyer-card {
+      position: relative;
+      height: rem(375);
+      background: #f9f9f9;
+      border-radius: rem(12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      @include media('sm') {
+        height: rem(320);
+      }
+
+      &__img {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: rem(16);
+        width: 100%;
+        background: var(--text-color);
+        color: #fff;
+
+        @include media('sm') {
+          padding: rem(14);
+        }
+      }
+
+      &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: rem(4);
+        margin-bottom: rem(16);
+
+        @include media('sm') {
+          margin-bottom: rem(10);
+        }
+      }
+
+      &__id {
+        font-size: rem(16);
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+
+      &__name {
+        font-size: rem(24);
+        font-weight: 700;
+
+        @include media('sm') {
+          font-size: rem(20);
+        }
+      }
+
+      &__role {
+        margin-top: auto;
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+    }
+  }
+</style>

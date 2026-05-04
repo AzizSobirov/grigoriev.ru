@@ -394,6 +394,57 @@ if (serviceEl) {
   sections.forEach((section) => observer.observe(section))
 }
 
+// project
+const projectEl = document.querySelector('.project')
+if (projectEl) {
+  // Scroll Navigation
+  const navItems = projectEl.querySelectorAll('[data-nav-item]')
+  const sections = projectEl.querySelectorAll('.project-block')
+
+  const updateActiveNav = (id) => {
+    navItems.forEach((nav) => {
+      const href = nav.getAttribute('href')
+      if (href === `#${id}`) {
+        nav.classList.add('is-active')
+      } else {
+        nav.classList.remove('is-active')
+      }
+    })
+  }
+
+  // Smooth scroll
+  navItems.forEach((nav) => {
+    nav.addEventListener('click', (e) => {
+      e.preventDefault()
+      const id = nav.getAttribute('href').substring(1)
+      const target = document.getElementById(id)
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 100,
+          behavior: 'smooth',
+        })
+      }
+    })
+  })
+
+  // Intersection Observer for scroll tracking
+  const observerOptions = {
+    root: null,
+    rootMargin: '-10% 0px -80% 0px',
+    threshold: 0,
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        updateActiveNav(entry.target.id)
+      }
+    })
+  }, observerOptions)
+
+  sections.forEach((section) => observer.observe(section))
+}
+
 // Footer
 const currentYear = document.getElementById('current-year')
 if (currentYear) {
@@ -433,6 +484,21 @@ let topnewsSwiper = new Swiper('.topnews .swiper', {
     },
     1280: {
       slidesPerView: 4,
+      spaceBetween: 12,
+    },
+  },
+})
+
+let topservicesSwiper = new Swiper('.topservices .swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 12,
+  breakpoints: {
+    1025: {
+      slidesPerView: 3,
+      spaceBetween: 12,
+    },
+    1280: {
+      slidesPerView: 3,
       spaceBetween: 12,
     },
   },
@@ -490,6 +556,12 @@ let serviceFilterSwiper = new Swiper('.service__filter-swiper', {
   slidesPerView: 'auto',
   spaceBetween: 8,
 })
+
+let projectFilterSwiper = new Swiper('.project__filter-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+})
+
 
 let postGallerySwiper = new Swiper('.post__gallery', {
   slidesPerView: 1,
