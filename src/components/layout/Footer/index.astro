@@ -32,11 +32,17 @@ import { Image, Icon } from 'ui'
           <li><a href="/contacts">Контакты</a></li>
         </ul>
       </div>
+
+      <div class="footer__logo-watermark">
+        <Image src="logo-white.svg" alt="logo" />
+      </div>
     </div>
 
     <div class="footer__main">
       <div class="footer__contacts">
-        <a href="tel:+79112331212" class="footer__phone">+7 (911) 233-12-12</a>
+        <a href="tel:+79112331212" class="footer__phone text-h2"
+          >+7 (911) 233-12-12</a
+        >
 
         <div class="footer__right-side">
           <div class="footer__socials">
@@ -45,17 +51,17 @@ import { Image, Icon } from 'ui'
               <span>Telegram</span>
             </a>
             <a href="#" class="footer__social-link">
-              <Icon src="telegram.svg" />
-              <span>Telegram</span>
+              <Icon src="vk.svg" />
+              <span>Vkontakte</span>
             </a>
             <a href="#" class="footer__social-link">
-              <Icon src="telegram.svg" />
-              <span>Telegram</span>
+              <Icon src="youtube.svg" />
+              <span>Youtube</span>
             </a>
           </div>
-          <a href="mailto:info@grigoriev.ru" class="footer__email"
-            >info@grigoriev.ru</a
-          >
+          <a href="mailto:info@grigoriev.ru" class="footer__email">
+            info@grigoriev.ru
+          </a>
         </div>
       </div>
     </div>
@@ -85,15 +91,17 @@ import { Image, Icon } from 'ui'
     overflow: hidden;
 
     &__top {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: rem(40);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: rem(40) rem(25);
       margin-bottom: rem(120);
 
       @include media('lg') {
         margin-bottom: rem(60);
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @include media('sm') {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -101,6 +109,17 @@ import { Image, Icon } from 'ui'
       display: block;
       width: rem(240);
       filter: brightness(0) invert(1);
+
+      &-watermark {
+        width: 100%;
+        opacity: 0.2;
+
+        @include media('sm') {
+          img {
+            max-width: 60%;
+          }
+        }
+      }
 
       img {
         width: 100%;
@@ -148,6 +167,10 @@ import { Image, Icon } from 'ui'
 
     &__main {
       margin-bottom: rem(80);
+
+      @include media('sm') {
+        margin-bottom: rem(40);
+      }
     }
 
     &__contacts {
@@ -160,42 +183,14 @@ import { Image, Icon } from 'ui'
         flex-direction: column;
         align-items: flex-start;
       }
-    }
-
-    &__phone {
-      font-size: rem(100);
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: rem(-2);
-
-      @include media('2xl') {
-        font-size: rem(80);
-      }
-      @include media('xl') {
-        font-size: rem(72);
-      }
-      @include media('md') {
-        font-size: rem(48);
-      }
       @include media('sm') {
-        font-size: rem(36);
+        gap: rem(28);
       }
     }
 
-    &__right-side {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: rem(24);
-
-      @include media('xl') {
-        align-items: flex-start;
-        width: 100%;
-      }
-    }
-
+    &__phone,
     &__email {
-      font-size: rem(80);
+      font-size: rem(84);
       font-weight: 600;
       line-height: 1;
       letter-spacing: rem(-2);
@@ -203,31 +198,40 @@ import { Image, Icon } from 'ui'
       @include media('2xl') {
         font-size: rem(64);
       }
-      @include media('xl') {
-        font-size: rem(56);
-      }
-      @include media('md') {
-        font-size: rem(40);
-      }
       @include media('sm') {
-        font-size: rem(32);
+        font-size: rem(48);
+      }
+    }
+
+    &__right-side {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: rem(16);
+
+      @include media('xl') {
+        align-items: flex-start;
+        width: 100%;
       }
     }
 
     &__socials {
+      width: 100%;
       display: flex;
-      gap: rem(8);
+      gap: rem(12);
 
       @include media('sm') {
         flex-wrap: wrap;
+        gap: rem(8);
       }
     }
 
     &__social-link {
+      flex: 1 0 rem(80);
       display: flex;
       align-items: center;
       gap: rem(8);
-      padding: rem(12) rem(20);
+      padding: rem(8) rem(12);
       background: rgba(255, 255, 255, 0.05);
       border-radius: rem(12);
       font-size: rem(14);
@@ -238,9 +242,27 @@ import { Image, Icon } from 'ui'
         background: rgba(255, 255, 255, 0.1);
       }
 
-      :global(svg) {
+      img {
         width: rem(18);
         height: rem(18);
+        filter: invert(1);
+        opacity: 0.5;
+        transition: opacity 0.3s;
+      }
+
+      span {
+        opacity: 0.5;
+        transition: opacity 0.3s;
+      }
+
+      &:hover {
+        img {
+          opacity: 1;
+        }
+
+        span {
+          opacity: 1;
+        }
       }
     }
 
@@ -250,13 +272,13 @@ import { Image, Icon } from 'ui'
       display: flex;
       justify-content: space-between;
       gap: rem(20);
-      font-size: rem(14);
-      color: rgba(255, 255, 255, 0.4);
+      color: rgba(255, 255, 255, 0.3);
 
       @include media('md') {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         text-align: center;
+        gap: rem(16);
       }
 
       &-links {
@@ -265,28 +287,12 @@ import { Image, Icon } from 'ui'
 
         @include media('sm') {
           flex-direction: column;
-          gap: rem(12);
+          gap: rem(16);
         }
 
         a:hover {
           color: #fff;
         }
-      }
-    }
-
-    &__watermark {
-      position: absolute;
-      top: rem(20);
-      right: var(--content-padding);
-      width: rem(350);
-      height: rem(350);
-      opacity: 0.2;
-      pointer-events: none;
-      background: url('/assets/img/logo-white.svg') no-repeat center;
-      background-size: contain;
-
-      @include media('xl') {
-        display: none;
       }
     }
   }
