@@ -390,59 +390,59 @@ const reviews = [
           width: rem(320);
         }
       }
+    }
+  }
 
-      .review-card {
-        background: #ffffff;
-        border-radius: rem(16);
-        padding: rem(24);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  .review-card {
+    background: #ffffff;
+    border-radius: rem(16);
+    padding: rem(24);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 
-        @include media('sm') {
-          padding: rem(20);
-        }
+    @include media('sm') {
+      padding: rem(20);
+    }
 
-        &__header {
-          margin-bottom: rem(24);
-        }
+    &__header {
+      margin-bottom: rem(24);
+    }
 
-        &__rating {
-          display: flex;
-          align-items: center;
-          gap: rem(6);
-          margin-bottom: rem(8);
+    &__rating {
+      display: flex;
+      align-items: center;
+      gap: rem(6);
+      margin-bottom: rem(8);
 
-          svg {
-            width: rem(16);
-            height: rem(16);
-            color: var(--text-color);
-          }
+      svg {
+        width: rem(16);
+        height: rem(16);
+        color: var(--text-color);
+      }
 
-          span {
-            font-size: rem(14);
-            font-weight: 700;
-          }
-        }
+      span {
+        font-size: rem(14);
+        font-weight: 700;
+      }
+    }
 
-        &__name {
-          font-size: rem(24);
-          font-weight: 700;
+    &__name {
+      font-size: rem(24);
+      font-weight: 700;
 
-          @include media('sm') {
-            font-size: rem(20);
-          }
-        }
+      @include media('sm') {
+        font-size: rem(20);
+      }
+    }
 
-        &__text {
-          margin-top: auto;
-          font-size: rem(16);
+    &__text {
+      margin-top: auto;
+      font-size: rem(16);
 
-          @include media('sm') {
-            font-size: rem(14);
-          }
-        }
+      @include media('sm') {
+        font-size: rem(14);
       }
     }
   }

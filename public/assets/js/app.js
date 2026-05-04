@@ -445,6 +445,57 @@ if (projectEl) {
   sections.forEach((section) => observer.observe(section))
 }
 
+// reviews list
+const reviewsList = document.querySelector('.reviews-list')
+if (reviewsList) {
+  // Reviews List Show More
+  const reviewsListWrapper = document.querySelector(
+    '.reviews-list__cards .wrapper',
+  )
+  const reviewsShowMoreBtn = document.querySelector(
+    '.reviews-list__cards-footer button',
+  )
+
+  if (reviewsListWrapper && reviewsShowMoreBtn) {
+    const cards = Array.from(
+      reviewsListWrapper.querySelectorAll('.review-card'),
+    )
+    const initialCount = 6
+    const loadCount = 3
+    let currentVisible = initialCount
+
+    // Initially hide cards beyond initialCount
+    cards.forEach((card, index) => {
+      if (index >= initialCount) {
+        card.style.display = 'none'
+      }
+    })
+
+    // Hide button if we don't have more than initialCount cards
+    if (cards.length <= initialCount) {
+      reviewsShowMoreBtn.parentElement.style.display = 'none'
+    }
+
+    reviewsShowMoreBtn.addEventListener('click', () => {
+      const nextVisible = currentVisible + loadCount
+
+      // Show next batch
+      cards.forEach((card, index) => {
+        if (index >= currentVisible && index < nextVisible) {
+          card.style.display = 'flex' // The review-card usually has display: flex
+        }
+      })
+
+      currentVisible = nextVisible
+
+      // Hide button if all cards are shown
+      if (currentVisible >= cards.length) {
+        reviewsShowMoreBtn.parentElement.style.display = 'none'
+      }
+    })
+  }
+}
+
 // Footer
 const currentYear = document.getElementById('current-year')
 if (currentYear) {
@@ -507,7 +558,6 @@ let topservicesSwiper = new Swiper('.topservices .swiper', {
 let reviewsGeneralSwiper = new Swiper('.reviews__general .swiper', {
   slidesPerView: 'auto',
   spaceBetween: 12,
-  freeMode: true,
   watchSlidesProgress: true,
   breakpoints: {
     640: {
@@ -528,7 +578,6 @@ let reviewsGeneralSwiper = new Swiper('.reviews__general .swiper', {
 let reviewsMapSwiper = new Swiper('.reviews__map .swiper', {
   slidesPerView: 'auto',
   spaceBetween: 12,
-  freeMode: true,
   watchSlidesProgress: true,
   breakpoints: {
     1025: {
@@ -537,6 +586,22 @@ let reviewsMapSwiper = new Swiper('.reviews__map .swiper', {
     },
     1280: {
       slidesPerView: 3,
+      spaceBetween: 12,
+    },
+  },
+})
+
+let reviewsGallerySwiper = new Swiper('.reviews-list__gallery .swiper', {
+  slidesPerView: 1,
+  spaceBetween: 12,
+  watchSlidesProgress: true,
+  breakpoints: {
+    1025: {
+      slidesPerView: 3,
+      spaceBetween: 12,
+    },
+    1280: {
+      slidesPerView: 4,
       spaceBetween: 12,
     },
   },
@@ -561,7 +626,6 @@ let projectFilterSwiper = new Swiper('.project__filter-swiper', {
   slidesPerView: 'auto',
   spaceBetween: 8,
 })
-
 
 let postGallerySwiper = new Swiper('.post__gallery', {
   slidesPerView: 1,

@@ -1,11 +1,190 @@
 ---
 import { Section, H2 } from 'ui'
 import { Icon } from 'astro-icon/components'
+
+const photos = [
+  {
+    src: '/assets/img/reviews/1.png',
+    alt: 'Клиент 1',
+    name: 'Иван Иванов',
+    desc: 'Успешное дело по взысканию',
+  },
+
+  {
+    src: '/assets/img/reviews/2.png',
+    alt: 'Клиент 2',
+    name: 'Мария Сидорова',
+    desc: 'Защита прав потребителей',
+  },
+  {
+    src: '/assets/img/reviews/3.png',
+    alt: 'Клиент 3',
+    name: 'Анна Петрова',
+    desc: 'Семейный спор',
+  },
+  {
+    src: '/assets/img/reviews/4.png',
+    alt: 'Клиент 1',
+    name: 'Иван Иванов',
+    desc: 'Успешное дело по взысканию',
+  },
+  {
+    src: '/assets/img/reviews/3.png',
+    alt: 'Клиент 3',
+    name: 'Анна Петрова',
+    desc: 'Семейный спор',
+  },
+  {
+    src: '/assets/img/reviews/4.png',
+    alt: 'Клиент 1',
+    name: 'Иван Иванов',
+    desc: 'Успешное дело по взысканию',
+  },
+]
+
+const reviews = [
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'София',
+    rating: 5.0,
+    text: 'Хочу поблагодарить команду Level Consulting и в особенности юриста Салавата Илдаровича за высокий профессионализм, честность и грамотную работу! Я обращалась по делу о защите прав потребителей. Меня проконсультировали, всё понятно объяснили и составили досудебную претензию...',
+  },
+  {
+    name: 'Мария',
+    rating: 4.8,
+    text: 'Обращалась за консультацией по семейному праву. Очень компетентные специалисты, помогли разобраться в сложной ситуации с разделом имущества. Рекомендую!',
+  },
+  {
+    name: 'Алексей',
+    rating: 5.0,
+    text: 'Отличная юридическая компания. Помогли выиграть суд по ДТП. Всегда были на связи, объясняли каждый шаг. Спасибо огромное за вашу работу!',
+  },
+  {
+    name: 'Елена',
+    rating: 4.9,
+    text: 'Помогли с оформлением банкротства физического лица. Процедура прошла гладко, без лишних нервов. Юристы всегда готовы ответить на вопросы.',
+  },
+  {
+    name: 'Дмитрий',
+    rating: 5.0,
+    text: 'Профессионалы своего дела. Решили спор с застройщиком в досудебном порядке. Выплатили компенсацию за просрочку сдачи квартиры.',
+  },
+  {
+    name: 'Ольга',
+    rating: 5.0,
+    text: 'Спасибо за помощь в трудовом споре! Восстановили на работе и помогли получить все причитающиеся выплаты. Рекомендую Level Consulting всем.',
+  },
+  {
+    name: 'Игорь',
+    rating: 4.7,
+    text: 'Грамотные юристы. Обращался по вопросу взыскания долга. Работу выполнили оперативно и профессионально. Результатом доволен.',
+  },
+]
 ---
 
 <!-- Reviews -->
 <Section name="reviews-list">
   <H2>Мнение наших клиентов — лучшая оценка нашей работы.</H2>
+
+  <div class="reviews-list__total">
+    <div class="reviews-list__total-item">
+      <div class="text">
+        <span class="value value-blue">500+</span>
+        <span class="label">отзывов на 2Гис</span>
+      </div>
+      <div class="logo">
+        <img src="/assets/img/icons/2gis.svg" alt="2Гис" />
+      </div>
+    </div>
+    <div class="reviews-list__total-item">
+      <div class="text">
+        <span class="value value-red">400+</span>
+        <span class="label">отзывов на Яндекс картах</span>
+      </div>
+      <div class="logo">
+        <img src="/assets/img/icons/marker.svg" alt="" />
+        <img src="/assets/img/icons/yandex.svg" alt="Яндекс Карты" />
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-list__gallery">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {
+          photos.map((photo) => (
+            <div
+              class="swiper-slide"
+              data-fancybox="reviews-gallery"
+              data-src={photo.src}
+            >
+              <img src={photo.src} alt={photo.alt} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-list__cards">
+    <div class="reviews-list__cards-header">
+      <div class="marker">
+        <img src="/assets/img/icons/marker.svg" alt="" />
+      </div>
+
+      <div class="logo">
+        <img src="/assets/img/icons/yandex.svg" alt="" />
+      </div>
+    </div>
+
+    <div class="wrapper">
+      {
+        reviews.map((review) => (
+          <div class="review-card">
+            <div class="review-card__header">
+              <div class="review-card__rating">
+                <Icon name="tabler:star-filled" />
+                <span>{review.rating.toFixed(1)}</span>
+              </div>
+              <div class="review-card__name">{review.name}</div>
+            </div>
+            <div class="review-card__text">{review.text}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="reviews-list__cards-footer">
+      <button type="button">
+        <span>Показать больше</span>
+        <Icon name="tabler:arrow-right" />
+      </button>
+    </div>
+  </div>
 </Section>
 
 <style lang="scss" is:global>
@@ -22,9 +201,217 @@ import { Icon } from 'astro-icon/components'
       padding: rem(40) 0 !important;
     }
 
+    .container {
+      gap: rem(40) !important;
+
+      @include media('sm') {
+        gap: rem(20) !important;
+      }
+    }
+
     .text-h2 {
       font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
       line-height: 1;
+    }
+
+    &__total {
+      margin-top: rem(40);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(12);
+      width: 100%;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+
+      &-item {
+        background: #111111;
+        border-radius: rem(8);
+        padding: rem(16) rem(24);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+
+        &:nth-child(2) {
+          @include media('lg') {
+            display: none;
+          }
+        }
+
+        @include media('sm') {
+          padding: rem(16);
+        }
+
+        .text {
+          display: flex;
+          align-items: center;
+          gap: rem(8);
+          font-size: rem(16);
+
+          @include media('sm') {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: rem(4);
+            font-size: rem(12);
+          }
+        }
+
+        .value {
+          font-weight: 700;
+          font-size: rem(20);
+
+          &-blue {
+            color: #04b2ff;
+          }
+          &-red {
+            color: #ff5252;
+          }
+
+          @include media('sm') {
+            font-size: rem(18);
+            &.value-blue {
+              color: #ffda3a; // Golden on mobile based on design
+            }
+          }
+        }
+
+        .logo {
+          height: rem(20);
+          display: flex;
+          align-items: center;
+          gap: rem(8);
+
+          img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    &__gallery {
+      width: 100%;
+      height: rem(580);
+
+      @include media('sm') {
+        height: rem(480);
+      }
+
+      .swiper {
+        width: 100%;
+        height: 100%;
+
+        @include media('lg') {
+          overflow: visible;
+        }
+      }
+
+      .swiper-slide {
+        height: 100%;
+        overflow: hidden;
+        border-radius: rem(12);
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    &__cards {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: rem(20);
+
+      &-header {
+        width: 100%;
+        display: none;
+        background: #111111;
+        border-radius: rem(8);
+        padding: rem(16) rem(24);
+
+        @include media('lg') {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        @include media('sm') {
+          padding: rem(16);
+        }
+
+        .marker {
+          width: rem(24);
+          height: rem(24);
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .logo {
+          height: rem(24);
+          img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+          }
+        }
+      }
+
+      .wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: rem(12);
+
+        @include media('lg') {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @include media('sm') {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      &-footer {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: rem(12);
+
+        @include media('lg') {
+          grid-template-columns: 1fr;
+        }
+
+        button {
+          padding: rem(10) rem(16);
+          display: flex !important;
+          align-items: center;
+          gap: rem(20);
+          grid-column-start: 2;
+          color: #fff;
+          background: var(--text-color);
+          border-radius: rem(8);
+          justify-content: space-between;
+
+          @include media('lg') {
+            grid-column-start: 1;
+          }
+        }
+
+        svg {
+          width: rem(20);
+          height: rem(20);
+        }
+      }
     }
   }
 </style>
