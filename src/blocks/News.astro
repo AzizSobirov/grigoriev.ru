@@ -131,6 +131,11 @@ const categories = [
       width: 100%;
       overflow: hidden;
 
+      @media (min-width: 1025px) {
+        position: sticky;
+        top: rem(80);
+      }
+
       .filter-list {
         display: flex;
         flex-direction: column;
