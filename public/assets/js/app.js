@@ -243,6 +243,71 @@ if (newsEl) {
   })
 }
 
+// projects
+const projectsEl = document.querySelector('.projects')
+if (projectsEl) {
+  const desktopFilters = projectsEl.querySelectorAll('.filter-item')
+  const mobileFilters = projectsEl.querySelectorAll('.projects__filter-swiper .swiper-slide')
+  const cards = projectsEl.querySelectorAll('.project-card-wrapper')
+
+  const filterProjects = (category) => {
+    // Update active states
+    const allFilters = [...desktopFilters, ...mobileFilters]
+    allFilters.forEach((f) => {
+      if (f.dataset.filter === category) {
+        f.classList.add('is-active')
+      } else {
+        f.classList.remove('is-active')
+      }
+    })
+
+    // Filter cards
+    let visibleCount = 0
+    cards.forEach((card) => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block'
+        visibleCount++
+        requestAnimationFrame(() => {
+          card.style.opacity = '1'
+          card.style.transform = 'translateY(0)'
+        })
+      } else {
+        card.style.opacity = '0'
+        card.style.transform = 'translateY(20px)'
+        setTimeout(() => {
+          card.style.display = 'none'
+        }, 300)
+      }
+    })
+
+    // Handle empty state
+    const emptyMsg = projectsEl.querySelector('.projects__empty')
+    if (emptyMsg) {
+      if (visibleCount === 0) {
+        emptyMsg.style.display = 'block'
+        requestAnimationFrame(() => {
+          emptyMsg.style.opacity = '1'
+        })
+      } else {
+        emptyMsg.style.opacity = '0'
+        emptyMsg.style.display = 'none'
+      }
+    }
+  }
+
+  desktopFilters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      filterProjects(filter.dataset.filter)
+    })
+  })
+
+  mobileFilters.forEach((filter) => {
+    filter.addEventListener('click', () => {
+      filterProjects(filter.dataset.filter)
+    })
+  })
+}
+
 // Footer
 const currentYear = document.getElementById('current-year')
 if (currentYear) {
@@ -326,6 +391,11 @@ let reviewsMapSwiper = new Swiper('.reviews__map .swiper', {
 })
 
 let newsFilterSwiper = new Swiper('.news__filter-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+})
+
+let projectsFilterSwiper = new Swiper('.projects__filter-swiper', {
   slidesPerView: 'auto',
   spaceBetween: 8,
 })

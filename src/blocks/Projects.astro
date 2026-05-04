@@ -1,0 +1,380 @@
+---
+import { Section, H2 } from 'ui'
+import { Icon } from 'astro-icon/components'
+import ProtectionCard from '@/components/ProtectionCard.astro'
+
+const categories = [
+  { name: 'Все работы', filter: 'all', active: true },
+  {
+    name: 'Защита прав потребителей',
+    filter: 'Защита прав потребителей',
+    active: false,
+  },
+  { name: 'Семейный юрист', filter: 'Семейный юрист', active: false },
+  { name: 'Жилищный юрист', filter: 'Жилищный юрист', active: false },
+  {
+    name: 'Наследственный юрист',
+    filter: 'Наследственный юрист',
+    active: false,
+  },
+  {
+    name: 'Защита прав дольщиков',
+    filter: 'Защита прав дольщиков',
+    active: false,
+  },
+  { name: 'Трудовой юрист', filter: 'Трудовой юрист', active: false },
+  { name: 'Медицинский юрист', filter: 'Медицинский юрист', active: false },
+  { name: 'Финансовый юрист', filter: 'Финансовый юрист', active: false },
+]
+
+const projects = [
+  {
+    id: '1 / 50',
+    category: 'Защита прав потребителей',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '2 / 50',
+    category: 'Семейный юрист',
+    title:
+      'Возврат 1,15 млн рублей после расторжения договора на изготовление проектной документации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '3 / 50',
+    category: 'Жилищный юрист',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '4 / 50',
+    category: 'Наследственный юрист',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '5 / 50',
+    category: 'Защита прав дольщиков',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '6 / 50',
+    category: 'Трудовой юрист',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '7 / 50',
+    category: 'Медицинский юрист',
+    title:
+      'Отмена привлечения к субсидиарной ответственности на 311,4 млн рублей в деле о банкротстве',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '8 / 50',
+    category: 'Финансовый юрист',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '9 / 50',
+    category: 'Защита прав потребителей',
+    title:
+      'Возврат 1,15 млн рублей после расторжения договора на изготовление проектной документации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+]
+---
+
+<!-- Projects -->
+<Section name="projects">
+  <div class="projects__title-wrap">
+    <H2>Наш опыт – в успешно решённых делах и доверии клиентов.</H2>
+  </div>
+
+  <div class="wrapper">
+    <aside class="projects__sidebar">
+      <nav class="filter-list" aria-label="Фильтр проектов">
+        {
+          categories.map((cat) => (
+            <button
+              class:list={['filter-item', { 'is-active': cat.active }]}
+              data-filter={cat.filter}
+              type="button"
+            >
+              <span>{cat.name}</span>
+              <Icon name="tabler:plus" class="icon-plus" />
+              <Icon name="tabler:minus" class="icon-minus" />
+            </button>
+          ))
+        }
+      </nav>
+
+      <div class="projects__filter-swiper swiper">
+        <div class="swiper-wrapper">
+          {
+            categories.map((cat) => (
+              <div
+                class:list={['swiper-slide', { 'is-active': cat.active }]}
+                data-filter={cat.filter}
+              >
+                {cat.name}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="projects__content">
+      <div class="projects-grid">
+        {
+          projects.map((project) => (
+            <div class="project-card-wrapper" data-category={project.category}>
+              <ProtectionCard
+                index={project.id}
+                title={project.title}
+                desc={project.description}
+                href={project.href}
+              />
+            </div>
+          ))
+        }
+      </div>
+      <div class="projects__empty">По данному запросу проектов не найдено</div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .projects {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    .container {
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(32);
+      }
+    }
+
+    &__title-wrap {
+      margin-bottom: rem(40);
+
+      @include media('sm') {
+        margin-bottom: 0;
+      }
+
+      .text-h2 {
+        font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
+        line-height: 1.2;
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(20);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      width: 100%;
+
+      @media (min-width: 1025px) {
+        position: sticky;
+        top: rem(80);
+      }
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        @include media('lg') {
+          display: none;
+        }
+      }
+
+      .filter-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(12) rem(16);
+        background: #f2f2f2;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid rgb(104, 104, 104, 0.2);
+        color: var(--text-dark, #161e28);
+
+        span {
+          font-size: rem(14);
+          font-weight: 500;
+        }
+
+        svg {
+          width: rem(18);
+          height: rem(18);
+          opacity: 0.6;
+        }
+
+        .icon-plus {
+          display: none;
+        }
+        .icon-minus {
+          display: block;
+        }
+
+        &.is-active {
+          background: var(--primary, #005a87);
+          color: #ffffff;
+
+          svg {
+            opacity: 1;
+          }
+
+          .icon-plus {
+            display: block;
+          }
+          .icon-minus {
+            display: none;
+          }
+        }
+
+        &:hover:not(.is-active) {
+          background: #e8e8e8;
+        }
+      }
+    }
+
+    &__empty {
+      display: none;
+      padding: rem(60) 0;
+      text-align: center;
+      font-size: rem(20);
+      color: var(--gray, #686868);
+      width: 100%;
+      background: #fff;
+      border-radius: rem(16);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      transition: opacity 0.3s ease;
+      opacity: 0;
+
+      @include media('sm') {
+        font-size: rem(16);
+        padding: rem(40) rem(20);
+      }
+    }
+
+    &__filter {
+      &-swiper {
+        width: 100%;
+        display: none;
+
+        @include media('lg') {
+          display: block;
+          overflow: visible;
+        }
+
+        .swiper-slide {
+          padding: rem(8) rem(16);
+          width: fit-content !important;
+          font-size: rem(15);
+          transition: all 0.3s ease;
+          border: rem(1) solid rgb(104, 104, 104, 0.2);
+          border-radius: rem(8);
+          cursor: pointer;
+
+          &.is-active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+          }
+        }
+      }
+    }
+
+    .projects-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(12);
+
+      @include media('xl') {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-card-wrapper {
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+      &:nth-child(7n + 1),
+      &:nth-child(7n + 4) {
+        grid-column: span 2;
+
+        @include media('xl') {
+          grid-column: span 1; // Revert to 1 column on smaller screens or adjust layout
+        }
+        @include media('md') {
+          grid-column: span 1;
+        }
+      }
+
+      // To make it look good on 2 columns (xl screen)
+      @include media('xl') {
+        &:nth-child(even) {
+          // Maybe we just let it flow naturally on xl (2 cols)
+        }
+      }
+    }
+  }
+</style>
