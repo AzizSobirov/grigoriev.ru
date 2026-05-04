@@ -7,6 +7,7 @@ export { default as Project } from "./Project.astro";
 export { default as Projects } from "./Projects.astro";
 export { default as Protection } from "./Protection.astro";
 export { default as Reviews } from "./Reviews.astro";
+export { default as ReviewsList } from "./ReviewsList.astro";
 export { default as Service } from "./Service.astro";
 export { default as Services } from "./Services.astro";
 export { default as Steps } from "./Steps.astro";

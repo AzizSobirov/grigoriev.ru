@@ -1,0 +1,30 @@
+---
+import { Section, H2 } from 'ui'
+import { Icon } from 'astro-icon/components'
+---
+
+<!-- Reviews -->
+<Section name="reviews-list">
+  <H2>Мнение наших клиентов — лучшая оценка нашей работы.</H2>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .reviews-list {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    .text-h2 {
+      font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
+      line-height: 1;
+    }
+  }
+</style>
