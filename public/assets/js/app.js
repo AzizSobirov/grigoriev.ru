@@ -182,7 +182,9 @@ if (servicesEl) {
 const newsEl = document.querySelector('.news')
 if (newsEl) {
   const desktopFilters = newsEl.querySelectorAll('.filter-item')
-  const mobileFilters = newsEl.querySelectorAll('.news__filter-swiper .swiper-slide')
+  const mobileFilters = newsEl.querySelectorAll(
+    '.news__filter-swiper .swiper-slide',
+  )
   const cards = newsEl.querySelectorAll('.news-card')
 
   const filterNews = (category) => {
@@ -247,7 +249,9 @@ if (newsEl) {
 const projectsEl = document.querySelector('.projects')
 if (projectsEl) {
   const desktopFilters = projectsEl.querySelectorAll('.filter-item')
-  const mobileFilters = projectsEl.querySelectorAll('.projects__filter-swiper .swiper-slide')
+  const mobileFilters = projectsEl.querySelectorAll(
+    '.projects__filter-swiper .swiper-slide',
+  )
   const cards = projectsEl.querySelectorAll('.project-card-wrapper')
 
   const filterProjects = (category) => {
@@ -306,6 +310,88 @@ if (projectsEl) {
       filterProjects(filter.dataset.filter)
     })
   })
+}
+
+// service
+const serviceEl = document.querySelector('.service')
+if (serviceEl) {
+  // Accordions
+  const serviceItems = serviceEl.querySelectorAll('.service-item')
+  serviceItems.forEach((item) => {
+    const header = item.querySelector('.service-item__header')
+    const body = item.querySelector('.service-item__body')
+
+    if (header) {
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('is-active')
+
+        // Close others
+        serviceItems.forEach((other) => {
+          if (other !== item) {
+            other.classList.remove('is-active')
+            const otherBody = other.querySelector('.service-item__body')
+            if (otherBody) otherBody.style.maxHeight = '0'
+          }
+        })
+
+        // Toggle current
+        if (isActive) {
+          item.classList.remove('is-active')
+          if (body) body.style.maxHeight = '0'
+        } else {
+          item.classList.add('is-active')
+          if (body) body.style.maxHeight = body.scrollHeight + 'px'
+        }
+      })
+    }
+  })
+
+  // Scroll Navigation
+  const navItems = serviceEl.querySelectorAll('[data-nav-item]')
+  const sections = serviceEl.querySelectorAll('.service-block')
+
+  const updateActiveNav = (id) => {
+    navItems.forEach((nav) => {
+      const href = nav.getAttribute('href')
+      if (href === `#${id}`) {
+        nav.classList.add('is-active')
+      } else {
+        nav.classList.remove('is-active')
+      }
+    })
+  }
+
+  // Smooth scroll
+  navItems.forEach((nav) => {
+    nav.addEventListener('click', (e) => {
+      e.preventDefault()
+      const id = nav.getAttribute('href').substring(1)
+      const target = document.getElementById(id)
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 100,
+          behavior: 'smooth',
+        })
+      }
+    })
+  })
+
+  // Intersection Observer for scroll tracking
+  const observerOptions = {
+    root: null,
+    rootMargin: '-10% 0px -80% 0px',
+    threshold: 0,
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        updateActiveNav(entry.target.id)
+      }
+    })
+  }, observerOptions)
+
+  sections.forEach((section) => observer.observe(section))
 }
 
 // Footer
@@ -396,6 +482,11 @@ let newsFilterSwiper = new Swiper('.news__filter-swiper', {
 })
 
 let projectsFilterSwiper = new Swiper('.projects__filter-swiper', {
+  slidesPerView: 'auto',
+  spaceBetween: 8,
+})
+
+let serviceFilterSwiper = new Swiper('.service__filter-swiper', {
   slidesPerView: 'auto',
   spaceBetween: 8,
 })

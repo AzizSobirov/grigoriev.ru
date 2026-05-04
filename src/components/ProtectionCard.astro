@@ -6,7 +6,7 @@ interface Props {
   title: string
   desc?: string
   href?: string
-  variant?: 'white' | 'blue'
+  variant?: 'white' | 'blue' | 'black'
   class?: string
 }
 
@@ -132,6 +132,61 @@ const {
 
         .protection-card__arrow {
           color: #ffffff;
+          transform: translateX(rem(5));
+        }
+      }
+    }
+
+    &--black {
+      background: #0e0e0e;
+      color: #ffffff;
+
+      .protection-card__content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .protection-card__index {
+        display: none;
+      }
+
+      .protection-card__title {
+        font-size: rem(24);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: rem(12);
+
+        @include media('sm') {
+          font-size: rem(20);
+        }
+      }
+
+      .protection-card__desc {
+        font-size: rem(14);
+        color: rgba(255, 255, 255, 0.3);
+        margin-top: auto;
+        line-height: 1.4;
+        max-width: 90%;
+      }
+
+      .protection-card__arrow {
+        position: absolute;
+        bottom: rem(28);
+        right: rem(28);
+        color: #ffffff;
+        transition: transform 0.3s ease;
+
+        @include media('sm') {
+          bottom: rem(20);
+          right: rem(20);
+        }
+      }
+
+      &:hover {
+        background: #1a1a1a;
+        .protection-card__arrow {
           transform: translateX(rem(5));
         }
       }

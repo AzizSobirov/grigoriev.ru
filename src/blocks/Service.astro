@@ -1,0 +1,760 @@
+---
+import { Section, H2, H3, P, Image, Button } from 'ui'
+import ProtectionCard from '@/components/ProtectionCard.astro'
+import { Icon } from 'astro-icon/components'
+
+const navItems = [
+  { name: 'Виды услуг', id: 'services', active: true },
+  { name: 'Особенности', id: 'features', active: false },
+  { name: 'Адвокаты', id: 'lawyers', active: false },
+  { name: 'Проекты', id: 'projects', active: false },
+]
+
+const services = [
+  {
+    title: 'Возврат денег за товар, работу или услугу',
+    price: 'от 2 000 ₽',
+    items: [
+      'Возврат денежных средств за некачественно оказанную услугу',
+      'Возврат денежных средств за некачественный товар',
+      'Раздел ипотеки и кредитов',
+      'Споры о детях',
+      'Споры по алиментам',
+    ],
+  },
+  {
+    title: 'Взыскание за нарушение условий договора',
+    price: 'от 2 000 ₽',
+    items: ['Услуга 1', 'Услуга 2', 'Услуга 3'],
+  },
+  {
+    title: 'Споры с банками, МФО и страховыми компаниями',
+    price: 'от 2 000 ₽',
+    items: ['Услуга 1', 'Услуга 2', 'Услуга 3'],
+  },
+  {
+    title: 'Взыскание морального ущерба и пеней',
+    price: 'от 2 000 ₽',
+    items: ['Услуга 1', 'Услуга 2', 'Услуга 3'],
+  },
+  {
+    title: 'Подготовка документов, представляемых в суды',
+    price: 'от 2 000 ₽',
+    items: ['Услуга 1', 'Услуга 2', 'Услуга 3'],
+  },
+  {
+    title: 'Другие услуги юриста по защите прав потребителей',
+    price: 'от 2 000 ₽',
+    items: ['Услуга 1', 'Услуга 2', 'Услуга 3'],
+  },
+]
+
+const features = [
+  {
+    id: '01',
+    title: 'Бесплатная консультация',
+    desc: '+7 (911) 233-12-12. Наш юрист на связи 7 дней в неделю',
+  },
+  {
+    id: '02',
+    title: 'Рассрочка платежа',
+    desc: 'Возможность разделить платеж на 3 части',
+  },
+  {
+    id: '03',
+    title: 'Страхование дела',
+    desc: 'Ваше дело застраховано на 10 млн ₽',
+  },
+  {
+    id: '04',
+    title: 'Дополнительный пункт',
+    desc: 'Дополнительный пункт',
+  },
+]
+
+const lawyers = [
+  {
+    id: '01/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/1.jpg',
+  },
+  {
+    id: '02/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/2.jpg',
+  },
+  {
+    id: '03/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/3.jpg',
+  },
+  {
+    id: '01/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/4.jpg',
+  },
+  {
+    id: '02/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/5.jpg',
+  },
+  {
+    id: '03/04',
+    name: 'Никита Пахомов',
+    role: 'Руководитель',
+    image: 'lawyers/6.jpg',
+  },
+]
+
+const projects = [
+  {
+    id: '1 / 50',
+    category: 'Защита прав потребителей',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+  {
+    id: '2 / 50',
+    category: 'Защита прав потребителей',
+    title:
+      'Сохранено право собственности на долю в квартире клиента и увеличен размер денежной компенсации',
+    description:
+      'Клиент выступал в качестве ответчика по делу о разделе совместно нажитого имущества – истец требовал разделить совместно нажитое имущество по своему усмотрению.',
+    href: '#',
+  },
+]
+---
+
+<!-- Service -->
+<Section name="service">
+  <div class="service__title-wrap">
+    <H2>Защита прав потребителей</H2>
+  </div>
+
+  <div class="wrapper">
+    <aside class="service__sidebar">
+      <nav class="filter-list" aria-label="Навигация по услуге">
+        {
+          navItems.map((item) => (
+            <a
+              class:list={['filter-item', { 'is-active': item.active }]}
+              href={`#${item.id}`}
+              data-nav-item
+            >
+              <span>{item.name}</span>
+              <Icon name="tabler:arrow-down" class="icon-arrow" />
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="service__filter-swiper swiper">
+        <div class="swiper-wrapper">
+          {
+            navItems.map((item) => (
+              <a
+                class:list={['swiper-slide', { 'is-active': item.active }]}
+                href={`#${item.id}`}
+                data-nav-item
+              >
+                {item.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+
+    <div class="service__content">
+      <!-- Services -->
+      <div
+        id="services"
+        class="service-block scroll-mt"
+        data-section="services"
+      >
+        <H3>Предоставляем услуги</H3>
+        <div class="service-list">
+          {
+            services.map((service) => (
+              <div class="service-item">
+                <div class="service-item__header">
+                  <div class="service-item__title">{service.title}</div>
+                  <div class="service-item__price-wrap">
+                    <span class="service-item__price">{service.price}</span>
+                    <Icon
+                      name="tabler:chevron-down"
+                      class="service-item__arrow"
+                    />
+                  </div>
+                </div>
+                {service.items && (
+                  <div class="service-item__body">
+                    <ul class="service-item__sublist">
+                      {service.items.map((subItem) => (
+                        <li>{subItem}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div
+        id="features"
+        class="service-block scroll-mt"
+        data-section="features"
+      >
+        <H3>Особенности</H3>
+        <div class="features-list">
+          {
+            features.map((feature) => (
+              <div class="feature-item">
+                <div class="feature-item__left">
+                  <div class="feature-item__id">{feature.id}</div>
+                  <div class="feature-item__title">{feature.title}</div>
+                </div>
+                <div class="feature-item__desc">{feature.desc}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Lawyers -->
+      <div id="lawyers" class="service-block scroll-mt" data-section="lawyers">
+        <H3>Адвокаты в этом направлении</H3>
+        <div class="lawyers-grid">
+          {
+            lawyers.map((lawyer) => (
+              <div class="lawyer-card">
+                <div class="lawyer-card__img">
+                  <Image src={lawyer.image} alt={lawyer.name} />
+                </div>
+                <div class="lawyer-card__content">
+                  <div class="lawyer-card__top">
+                    <span class="lawyer-card__id">{lawyer.id}</span>
+                    <div class="lawyer-card__name">{lawyer.name}</div>
+                  </div>
+                  <div class="lawyer-card__role">{lawyer.role}</div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div
+        id="projects"
+        class="service-block scroll-mt"
+        data-section="projects"
+      >
+        <H3>Защищенные проекты</H3>
+        <div class="projects-grid">
+          {
+            projects.map((project) => (
+              <ProtectionCard
+                index={project.id}
+                title={project.title}
+                desc={project.description}
+                href={project.href}
+                variant="black"
+              />
+            ))
+          }
+        </div>
+        <a href="/projects" class="show-more">
+          <span>Показать больше</span>
+          <Icon name="tabler:arrow-right" />
+        </a>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style lang="scss" is:global>
+  @use 'scss/helpers' as *;
+
+  .service {
+    position: relative;
+    padding: rem(80) 0 !important;
+
+    @include media('lg') {
+      padding: rem(60) 0 !important;
+    }
+    @include media('sm') {
+      padding: rem(40) 0 !important;
+    }
+
+    .container {
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(32);
+      }
+    }
+
+    &__title-wrap {
+      margin-bottom: rem(40);
+      @include media('sm') {
+        margin-bottom: 0;
+      }
+      .text-h2 {
+        font-size: clamp(2rem, 1.2174rem + 3.4783vw, 4rem);
+        line-height: 1.2;
+      }
+    }
+
+    .wrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: rem(320) 1fr;
+      gap: rem(20);
+      align-items: flex-start;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__sidebar {
+      width: 100%;
+      overflow: hidden;
+
+      @media (min-width: 1025px) {
+        position: sticky;
+        top: rem(80);
+      }
+
+      .filter-list {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        @include media('lg') {
+          display: none;
+        }
+      }
+
+      .filter-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(12) rem(16);
+        background: #f2f2f2;
+        border-radius: rem(8);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 1px solid rgb(104, 104, 104, 0.2);
+        color: var(--text-dark, #161e28);
+
+        span {
+          font-size: rem(14);
+          font-weight: 500;
+        }
+
+        .icon-arrow {
+          width: rem(18);
+          height: rem(18);
+          opacity: 0.6;
+          transition: transform 0.3s ease;
+        }
+
+        &.is-active {
+          background: var(--primary, #005a87);
+          color: #ffffff;
+
+          .icon-arrow {
+            opacity: 1;
+            transform: rotate(-90deg);
+          }
+        }
+
+        &:hover:not(.is-active) {
+          background: #e8e8e8;
+        }
+      }
+    }
+
+    &__filter-swiper {
+      width: 100%;
+      display: none;
+
+      @include media('lg') {
+        display: block;
+        overflow: visible;
+      }
+
+      .swiper-slide {
+        padding: rem(8) rem(16);
+        width: fit-content !important;
+        font-size: rem(15);
+        transition: all 0.3s ease;
+        border: rem(1) solid rgb(104, 104, 104, 0.2);
+        border-radius: rem(8);
+        cursor: pointer;
+
+        &.is-active {
+          background: var(--primary);
+          color: #fff;
+          border-color: var(--primary);
+        }
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: rem(40);
+
+      @include media('sm') {
+        gap: rem(25);
+      }
+    }
+
+    .service-block {
+      background: #fff;
+      border-radius: rem(10);
+      padding: rem(32);
+
+      @include media('sm') {
+        padding: rem(24);
+      }
+      @include media('xs') {
+        padding: rem(20);
+      }
+
+      .text-h3 {
+        margin-bottom: rem(24);
+
+        @include media('sm') {
+          margin-bottom: rem(20);
+        }
+      }
+    }
+
+    .scroll-mt {
+      scroll-margin-top: rem(100);
+      @include media('lg') {
+        scroll-margin-top: rem(80);
+      }
+    }
+
+    // Service list
+    .service-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-item {
+      border-bottom: 1px solid #f2f2f2;
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(20) 0;
+        cursor: pointer;
+        gap: rem(20);
+
+        @include media('sm') {
+          padding: rem(16) 0;
+        }
+      }
+
+      &__title {
+        font-size: rem(16);
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      &__price-wrap {
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+        flex-shrink: 0;
+
+        @include media('sm') {
+          gap: rem(10);
+        }
+      }
+
+      &__price {
+        font-size: rem(16);
+        color: var(--gray, #686868);
+
+        @include media('sm') {
+          color: #fff;
+          padding: rem(4) rem(10);
+          font-size: rem(14);
+          background: var(--primary);
+          border-radius: 9999px;
+        }
+      }
+
+      &__arrow {
+        width: rem(20);
+        height: rem(20);
+        opacity: 0.4;
+        transition: transform 0.3s ease;
+      }
+
+      &.is-active {
+        border-color: var(--text-color);
+
+        .service-item__arrow {
+          transform: rotate(180deg);
+        }
+      }
+
+      &__body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      &__sublist {
+        padding: 0 0 rem(20) rem(20);
+        display: flex;
+        flex-direction: column;
+        gap: rem(8);
+
+        li {
+          font-size: rem(16);
+          color: var(--gray, #686868);
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            left: rem(-15);
+            top: rem(8);
+            width: rem(4);
+            height: rem(4);
+            background: var(--primary);
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+
+    // Features list
+    .features-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feature-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: rem(15) 0;
+      align-items: center;
+
+      @include media('lg') {
+        grid-template-columns: 1fr;
+        gap: rem(12);
+      }
+      @include media('sm') {
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &__left {
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+
+        @include media('sm') {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: rem(10);
+        }
+      }
+
+      &__id {
+        width: rem(48);
+        height: rem(24);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary, #005a87);
+        color: #fff;
+        border-radius: rem(14);
+        font-size: rem(14);
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+
+      &__title {
+        font-size: rem(18);
+        font-weight: 600;
+      }
+
+      &__desc {
+        font-size: 1rem;
+        color: var(--gray, #686868);
+        text-align: right;
+
+        @include media('lg') {
+          text-align: left;
+          padding-left: rem(68);
+        }
+        @include media('sm') {
+          padding-left: 0;
+          text-align: left;
+        }
+      }
+    }
+
+    // Lawyers grid
+    .lawyers-grid {
+      margin-top: rem(30);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      gap: rem(8);
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+        gap: rem(12);
+      }
+    }
+
+    .lawyer-card {
+      position: relative;
+      height: rem(375);
+      background: #f9f9f9;
+      border-radius: rem(12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+
+      @include media('sm') {
+        height: rem(320);
+      }
+
+      &__img {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: rem(16);
+        width: 100%;
+        background: var(--text-color);
+        color: #fff;
+
+        @include media('sm') {
+          padding: rem(14);
+        }
+      }
+
+      &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: rem(4);
+        margin-bottom: rem(16);
+
+        @include media('sm') {
+          margin-bottom: rem(10);
+        }
+      }
+
+      &__id {
+        font-size: rem(16);
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+
+      &__name {
+        font-size: rem(24);
+        font-weight: 700;
+
+        @include media('sm') {
+          font-size: rem(20);
+        }
+      }
+
+      &__role {
+        margin-top: auto;
+
+        @include media('sm') {
+          font-size: rem(14);
+        }
+      }
+    }
+
+    // Projects grid
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(12);
+      margin-bottom: rem(32);
+
+      @include media('md') {
+        grid-template-columns: 1fr;
+      }
+
+      .protection-card {
+        min-height: rem(260);
+
+        .protection-card__arrow svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+    }
+
+    .show-more {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: rem(16) rem(24);
+      border: 1px solid #f1f1f1;
+      border-radius: rem(8);
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f2f2f2;
+        color: var(--primary);
+      }
+
+      svg {
+        width: rem(20);
+        height: rem(20);
+      }
+    }
+  }
+</style>
